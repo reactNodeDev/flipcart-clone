@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { CategoryButton } from "..";
 
 interface ICategoriesContainer {
@@ -25,4 +26,4 @@ const CategoriesContainer = ({
   );
 };
 
-export default CategoriesContainer;
+export default memo(CategoriesContainer);

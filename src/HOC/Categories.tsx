@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
@@ -10,7 +10,8 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
 
-  const categories = !data
+  const categories =  useMemo(()=>{
+    return !data
     ? []
     : [
         { name: "Electronics", array: [data[0], data[1]] },
@@ -19,8 +20,10 @@ const Categories = () => {
         { name: "Clothes", array: [data[7]] },
         { name: "Auto", array: [data[17], data[18]] },
       ];
+  },[data]) 
 
-  const categoriesByGender = !data
+  const categoriesByGender = useMemo(()=>{
+    return !data
     ? []
     : [
         {
@@ -34,12 +37,14 @@ const Categories = () => {
           headingClassname: "text-red-700 text-center",
         },
       ];
+  },[data])  
+  
 
   const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
-  if (data?.length === 0)
+  if (!data)
     return (
-      <section className="relative mt-2 mx-4 bg-white p-3 overflow-hidden  flex items-center justify-center">
+      <section className="relative mt-2 mx-4 w-[calc(100vw-2.75rem)] bg-white p-3 overflow-hidden  flex items-center justify-center">
         <Loader className="h-[3rem] w-[3rem]" />
       </section>
     );
