@@ -1,0 +1,23 @@
+#root {
+    background-color: #F1F2F4;
+    min-height: 100vh;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	border: 7px solid #1B2730;
+	border-radius: 50%;
+	border-top-color: #4caf50;
+	border-right-color: #4caf50;
+	border-left-color: #4caf50;
+	animation: spinner 1s linear infinite;
+	margin-left: auto;
+	margin-right: auto;
+}
