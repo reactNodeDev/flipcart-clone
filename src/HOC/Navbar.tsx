@@ -5,10 +5,10 @@ import { SiGooglemybusiness } from "react-icons/si";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CiMenuKebab } from "react-icons/ci";
-import {
-  MdOutlineKeyboardArrowDown,
-  MdOutlineKeyboardArrowUp
-} from "react-icons/md";
+// import {
+//   MdOutlineKeyboardArrowDown,
+//   MdOutlineKeyboardArrowUp
+// } from "react-icons/md";
 import { navbarDropdownItems, navbarDropdownOptionsItems } from "../utils";
 
 const Navbar = () => {
@@ -47,18 +47,17 @@ const Navbar = () => {
         <NavbarItem Icon={SiGooglemybusiness} text="Become a Seller" />
 
         {/* user profile dropdown menu */}
-        <div
+        <section
           id="profileButton"
           className="relative p-2 h-auto"
-         
+          onMouseOver={handleOnMouseOver}
+          onMouseOut={handleOnMouseOut}
+          data-name={"userProfileButton"}
         >
           <NavbarItem
             Icon={GoPerson}
             text="User"
-            ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
-            onMouseOver={handleOnMouseOver}
-            onMouseOut={handleOnMouseOut}
-            data-name={"userProfileButton"}
+            // ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
           />
           {toggleDropdown ? (
             <DropdownMenu
@@ -67,7 +66,7 @@ const Navbar = () => {
               data-name={"userProfileMenu"}
             />
           ) : null}
-        </div>
+        </section>
         {/*  */}
 
         <NavbarItem Icon={AiOutlineShoppingCart} text="Cart" />
@@ -76,11 +75,11 @@ const Navbar = () => {
         <section
           id="menuButton"
           className="h-auto optionsMenu relative p-2 justify-end"
-          
-        >
-          <NavbarItem Icon={CiMenuKebab} text="" onMouseOver={handleOnMouseOver}
+          onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
-          data-name={"optionsMenuButton"} />
+          data-name={"optionsMenuButton"}
+        >
+          <NavbarItem Icon={CiMenuKebab} text="" />
           {toggleOptionsDropdown ? (
             <DropdownMenu
               menuItems={navbarDropdownOptionsItems}

@@ -13,7 +13,7 @@ type NavbarItemProps = {
 const NavbarItem = ({ Icon, text, ExtraIcon, onMouseOver, onMouseOut, className, onClick }: NavbarItemProps) => {
     return (
         <>
-        <button onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} className={`${className} flex items-center justify-center space-x-1`}>
+        <button onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} className={`${className} h-auto flex items-center justify-center space-x-1`}>
             <Icon />
             <p>
                 {text}
