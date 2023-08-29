@@ -5,22 +5,25 @@ import { SiGooglemybusiness } from "react-icons/si";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CiMenuKebab } from "react-icons/ci";
-import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from "react-icons/md";
+import {
+  MdOutlineKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp
+} from "react-icons/md";
 import { navbarDropdownItems, navbarDropdownOptionsItems } from "../utils";
 
 const Navbar = () => {
   const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
   const [toggleOptionsDropdown, setToggleOptionsDropdown] =
     useState<boolean>(false);
-  const name = (e:React.MouseEvent) => e.currentTarget.getAttribute("data-name");
+  const name = (e: React.MouseEvent) =>
+    e.currentTarget.getAttribute("data-name");
 
-
-  const handleOnMouseOver = (e:React.MouseEvent) => {
+  const handleOnMouseOver = (e: React.MouseEvent) => {
     if (name(e) === "userProfileButton") setToggleDropdown(true);
     if (name(e) === "optionsMenuButton") setToggleOptionsDropdown(true);
   };
 
-  const handleOnMouseOut = (e:React.MouseEvent) => {
+  const handleOnMouseOut = (e: React.MouseEvent) => {
     if (name(e) === "userProfileButton") setToggleDropdown(false);
     if (name(e) === "optionsMenuButton") setToggleOptionsDropdown(false);
   };
@@ -44,13 +47,13 @@ const Navbar = () => {
         <NavbarItem Icon={SiGooglemybusiness} text="Become a Seller" />
 
         {/* user profile dropdown menu */}
-        <section
-        id="profileButton"
-          className="relative p-2"
+        <div
+          id="profileButton"
+          className="relative p-2 h-auto"
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
           data-name={"userProfileButton"}
-          >
+        >
           <NavbarItem
             Icon={GoPerson}
             text="User"
@@ -63,7 +66,7 @@ const Navbar = () => {
               data-name={"userProfileMenu"}
             />
           ) : null}
-        </section>
+        </div>
         {/*  */}
 
         <NavbarItem Icon={AiOutlineShoppingCart} text="Cart" />

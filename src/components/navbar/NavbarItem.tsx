@@ -18,7 +18,7 @@ const NavbarItem = ({ Icon, text, ExtraIcon, onMouseOver, onMouseOut, className,
             <p>
                 {text}
             </p>
-            {ExtraIcon ? <ExtraIcon className='transition-all hover:ease-linear duration-300' /> : null}
+            {ExtraIcon ? <ExtraIcon /> : null}
         </button>
         </>
     )
