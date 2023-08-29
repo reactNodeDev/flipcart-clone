@@ -14,7 +14,7 @@ const DropdownMenu = ({
   onMouseOut,
 }: DropdownMenuProps) => {
   return (
-    <button
+    <section
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
       className={`${className} drop-shadow-xl p-2 space-y-3 mt-2 z-[1000]`}
@@ -27,7 +27,7 @@ const DropdownMenu = ({
           </a>
         );
       })}
-    </button>
+    </section>
   );
 };
 
