@@ -10,35 +10,34 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
 
-  const categories =  useMemo(()=>{
+  const categories = useMemo(() => {
     return !data
-    ? []
-    : [
-        { name: "Electronics", array: [data[0], data[1]] },
-        { name: "Self Care", array: [data[2], data[3], data[16]] },
-        { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
-        { name: "Clothes", array: [data[7]] },
-        { name: "Auto", array: [data[17], data[18]] },
-      ];
-  },[data]) 
+      ? []
+      : [
+          { name: "Electronics", array: [data[0], data[1]] },
+          { name: "Self Care", array: [data[2], data[3], data[16]] },
+          { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
+          { name: "Clothes", array: [data[7]] },
+          { name: "Auto", array: [data[17], data[18]] },
+        ];
+  }, [data]);
 
-  const categoriesByGender = useMemo(()=>{
+  const categoriesByGender = useMemo(() => {
     return !data
-    ? []
-    : [
-        {
-          name: "Women",
-          array: [data[8], data[9], data[13], data[14], data[15]],
-          headingClassname: "text-pink-700 text-center",
-        },
-        {
-          name: "Men",
-          array: [data[10], data[11], data[12]],
-          headingClassname: "text-red-700 text-center",
-        },
-      ];
-  },[data])  
-  
+      ? []
+      : [
+          {
+            name: "Women",
+            array: [data[8], data[9], data[13], data[14], data[15]],
+            headingClassname: "text-pink-700 text-center",
+          },
+          {
+            name: "Men",
+            array: [data[10], data[11], data[12]],
+            headingClassname: "text-red-700 text-center",
+          },
+        ];
+  }, [data]);
 
   const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
@@ -82,11 +81,13 @@ const Categories = () => {
 
         {/* see-more/less button */}
         <section className="w-full flex justify-center">
-          <PrimaryButton onClick={() => setSeeAll(!seeAll)} text={seeAll ? "See Less" : "See All"} Icon={seeAll ? (
-              MdOutlineKeyboardArrowUp
-            ) : (
-              MdOutlineKeyboardArrowDown
-            )} />
+          <PrimaryButton
+            onClick={() => setSeeAll(!seeAll)}
+            text={seeAll ? "See Less" : "See All"}
+            Icon={
+              seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
+            }
+          />
         </section>
       </section>
     </>

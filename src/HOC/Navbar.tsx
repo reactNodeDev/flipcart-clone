@@ -49,11 +49,12 @@ const Navbar = () => {
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
           data-name={"userProfileButton"}
+          onClick={()=>{setToggleDropdown(!toggleDropdown)}}
         >
           <NavbarItem
             Icon={GoPerson}
             text="User"
-            ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowDown : MdOutlineKeyboardArrowUp}
+            ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
           />
           {toggleDropdown ? (
             <DropdownMenu
