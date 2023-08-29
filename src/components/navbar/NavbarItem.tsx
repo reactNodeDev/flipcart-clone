@@ -6,13 +6,14 @@ type NavbarItemProps = {
     text: string,
     onMouseOver? : React.MouseEventHandler<HTMLButtonElement>,
     onMouseOut? : React.MouseEventHandler<HTMLButtonElement>,
+    onClick? : React.MouseEventHandler<HTMLButtonElement>,
     className? : string
 }
 
-const NavbarItem = ({ Icon, text, ExtraIcon, onMouseOver, onMouseOut, className }: NavbarItemProps) => {
+const NavbarItem = ({ Icon, text, ExtraIcon, onMouseOver, onMouseOut, className, onClick }: NavbarItemProps) => {
     return (
         <>
-        <button onMouseOver={onMouseOver} onMouseOut={onMouseOut} className={`${className} flex items-center justify-center space-x-1`}>
+        <button onClick={onClick} onMouseOver={onMouseOver} onMouseOut={onMouseOut} className={`${className} flex items-center justify-center space-x-1`}>
             <Icon />
             <p>
                 {text}
