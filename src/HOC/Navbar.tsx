@@ -45,6 +45,7 @@ const Navbar = () => {
 
         {/* user profile dropdown menu */}
         <section
+        id="profileButton"
           className="relative p-2"
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
@@ -54,12 +55,10 @@ const Navbar = () => {
             Icon={GoPerson}
             text="User"
             ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
-            // onClick={()=>{setToggleDropdown(!toggleDropdown)}}
           />
           {toggleDropdown ? (
             <DropdownMenu
               menuItems={navbarDropdownItems}
-              // onMouseOut={handleOnMouseOut}
               className="userProfile absolute bg-white w-[12rem] left-0 z-[800]"
               data-name={"userProfileMenu"}
             />
@@ -72,7 +71,7 @@ const Navbar = () => {
         {/* menu options dropdown */}
         <section
           id="menuButton"
-          className="optionsMenu relative p-2 justify-end"
+          className="h-auto optionsMenu relative p-2 justify-end"
           onMouseOver={handleOnMouseOver}
           onMouseOut={handleOnMouseOut}
           data-name={"optionsMenuButton"}
