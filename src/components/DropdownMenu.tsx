@@ -17,7 +17,7 @@ const DropdownMenu = ({
     <section
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
-      className={`${className} drop-shadow-xl p-2 space-y-3 mt-2 z-[1000]`}
+      className={`${className} drop-shadow-xl p-2 space-y-3 mt-2 z-dropdownMenu`}
     >
       {menuItems.map((MenuItem: IDropdownMenuItem) => {
         return (

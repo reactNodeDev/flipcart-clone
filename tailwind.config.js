@@ -16,6 +16,10 @@ export default {
       },
       boxShadow : {
         BottomShadow : 'inset 0 -40px 30px -30px #64748b'
+      },
+      zIndex : {
+        modal : 100000,
+        dropdownMenu : 90000
       }
     },
   },
