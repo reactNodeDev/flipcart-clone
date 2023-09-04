@@ -39,8 +39,6 @@ const Categories = () => {
         ];
   }, [data]);
 
-  if(seeAll) throw new Error('something went wrong')
-
   const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
   if (!data)
