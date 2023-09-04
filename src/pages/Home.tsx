@@ -1,11 +1,10 @@
-import { Categories, Navbar } from "../HOC"
+import { Categories } from "../HOC"
 
 const Home = () => {
   return (
-    <>
-    <Navbar />
+    <main className="">
     <Categories />
-    </>
+    </main>
   )
 }
 

@@ -21,7 +21,7 @@ const DropdownMenu = ({
     >
       {menuItems.map((MenuItem: IDropdownMenuItem) => {
         return (
-          <a className="cursor-pointer flex items-center w-full space-x-1">
+          <a key={MenuItem.text} className="cursor-pointer flex items-center w-full space-x-1">
             <MenuItem.Icon />
             <p>{MenuItem.text}</p>
           </a>

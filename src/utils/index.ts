@@ -1,2 +1,3 @@
-export type {IDropdownMenuItem, ICategoryItem} from './types'
+export type {IDropdownMenuItem, ICategoryItem, ProductType, ReturnedDataType} from './types'
 export {navbarDropdownItems, navbarDropdownOptionsItems} from './navbarDropdownItems'
+export {default as isClickedInsideElement} from './helpers/isClickedInsideElement'

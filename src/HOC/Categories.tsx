@@ -5,11 +5,11 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
+import { ProductCarousel } from ".";
 
 const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
-
   const categories = useMemo(() => {
     return !data
       ? []
@@ -39,11 +39,13 @@ const Categories = () => {
         ];
   }, [data]);
 
+  if(seeAll) throw new Error('something went wrong')
+
   const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
   if (!data)
     return (
-      <section className="relative mt-2 mx-4 w-[calc(100vw-2.75rem)] bg-white p-3 overflow-hidden  flex items-center justify-center">
+      <section className="min-h-[10rem] relative mt-2 mx-4 w-[calc(100vw-2.75rem)] bg-white p-3 overflow-hidden  flex items-center justify-center">
         <Loader className="h-[3rem] w-[3rem]" />
       </section>
     );
@@ -57,7 +59,7 @@ const Categories = () => {
         </h3>
         {visibleCategories.map((category) => {
           const { name, array } = category;
-          return <CategoriesContainer categoryName={name} dataArray={array} />;
+          return <CategoriesContainer key={name} categoryName={name} dataArray={array} />;
         })}
 
         {/* category by gender */}
@@ -71,6 +73,7 @@ const Categories = () => {
               const { name, array, headingClassname } = category;
               return (
                 <CategoriesContainer
+                key={name}
                   categoryName={name}
                   dataArray={array}
                   headingClassname={headingClassname ? headingClassname : ""}
@@ -90,6 +93,8 @@ const Categories = () => {
           />
         </section>
       </section>
+
+      <ProductCarousel category="laptops" />
     </>
   );
 };

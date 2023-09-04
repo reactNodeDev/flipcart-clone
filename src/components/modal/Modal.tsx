@@ -1,34 +1,56 @@
-import React, {  useEffect, useRef } from "react"
-import { useSearchParams } from "react-router-dom"
+import React, { useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
+import { isClickedInsideElement } from "../../utils";
 
-const Modal = () => {
-    const dialogRef = useRef<HTMLDialogElement>(null)
-    const [searchParams, setSearchParams] = useSearchParams()
-    const showDialog = searchParams.get('showDialog')
+type ModalProps = {
+  children: React.ReactNode;
+};
 
-    const isClickedInsideElement = (e:React.MouseEvent, element : HTMLElement) => {
-        const el = element?.getBoundingClientRect()
-        return (
-            e.clientX > el.left &&
-            e.clientX < el.right &&
-            e.clientY > el.top &&
-            e.clientY < el.bottom
-        )
-    }
+const Modal = ({ children }: ModalProps) => {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const showDialog = searchParams.get("showDialog");
 
-    useEffect(()=>{
-        if(showDialog === 'true') dialogRef.current?.showModal()
-        else dialogRef.current?.close()
-    },[showDialog])
+  const onCloseDialog = async () => {
+    dialogRef.current?.close();
+    searchParams.delete("showDialog");
+    setSearchParams(searchParams);
+    dialogRef.current?.classList.add("hidden");
+  };
+
+  const onEscPressed = (e: KeyboardEvent) =>
+    e.key === "Escape" ? onCloseDialog() : null;
+
+  useEffect(() => {
+    if (showDialog === "true") dialogRef.current?.showModal();
+    else onCloseDialog();
+
+    dialogRef.current?.addEventListener("keydown", onEscPressed);
+    return () => {
+      dialogRef.current?.removeEventListener("keydown", onEscPressed);
+    };
+  }, [showDialog]);
 
   return (
-      <dialog ref={dialogRef} className="fixed h-[10rem] w-[15rem] backdrop:rgba(239, 29, 29, 0.57) self-center"  onClick={(e:React.MouseEvent) => {
-          if(showDialog && dialogRef.current && !isClickedInsideElement(e, dialogRef.current)) setSearchParams({showModal:'false'})
-        }} > 
-        <p>This is a modal</p>
-        <button className="" onClick={()=>{setSearchParams({})}} > Close</button>
-        </dialog>
-  )
-}
+    <dialog
+      ref={dialogRef}
+      className=" dialog fixed h-[10rem] w-[15rem]"
+      onClose={() => {
+        console.log("closed");
+      }}
+      onClick={(e: React.MouseEvent) => {
+        if (
+          showDialog &&
+          dialogRef.current &&
+          !isClickedInsideElement(e, dialogRef.current)
+        ) {
+          onCloseDialog();
+        }
+      }}
+    >
+      {children}
+    </dialog>
+  );
+};
 
-export default Modal
+export default Modal;

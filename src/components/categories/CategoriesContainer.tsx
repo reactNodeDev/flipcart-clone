@@ -19,7 +19,7 @@ const CategoriesContainer = ({
       </h5>
       <div className="grid grid-cols-12 items-center gap-3">
         {dataArray?.map((category: string) => {
-          return <CategoryButton name={category?.toUpperCase()} />;
+          return <CategoryButton key={category} name={category?.toUpperCase()} />;
         })}
       </div>
     </div>

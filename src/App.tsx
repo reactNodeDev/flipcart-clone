@@ -1,12 +1,10 @@
 import './App.css'
-import { RootRouter } from './routes'
+import { RouterProvider } from 'react-router-dom'
+import { RootRouter } from './routes/index.ts'
 
 function App() {
-
   return (
-    <>
-      <RootRouter />
-    </>
+    <RouterProvider router={RootRouter} />
   )
 }
 
