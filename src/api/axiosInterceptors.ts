@@ -29,7 +29,7 @@ const onResponse = (res: AxiosResponse): AxiosResponse => {
 };
 
 const onResponseError = (error: AxiosError): AxiosError => {
-  if (error && error.status) {
+  if (axios.isAxiosError(error)) {
     switch(error.status) {
       case 401 : throw Error(`Bad Request Error : ${error.status} `)
       case 403 : throw Error(`Forbidden Request Error : ${error.status} `)
@@ -39,7 +39,7 @@ const onResponseError = (error: AxiosError): AxiosError => {
   return error;
 };
 
-axiosClient.interceptors.request.use(onRequest, onRequestError);
-axiosClient.interceptors.response.use(onResponse, onResponseError);
+axiosClient.interceptors.request.use(onRequest, onRequestError,{synchronous:true});
+axiosClient.interceptors.response.use(onResponse, onResponseError,{synchronous:true});
 
 export default axiosClient;

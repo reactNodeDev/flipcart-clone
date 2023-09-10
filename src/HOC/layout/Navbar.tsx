@@ -7,6 +7,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CiMenuKebab } from "react-icons/ci";
 import { navbarDropdownItems, navbarDropdownOptionsItems } from "../../utils";
 import { Link, Outlet, ScrollRestoration, useSearchParams } from "react-router-dom";
+import {motion} from 'framer-motion'
 
 const Navbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -69,7 +70,15 @@ const Navbar = () => {
             <NavbarItem
               Icon={GoPerson}
               text="User"
-              // ExtraIcon={toggleDropdown ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
+              ExtraIconHTML={<motion.span 
+            
+              animate={{rotate:toggleDropdown?180:0}}
+              transition={{
+                duration:0.1,
+                type:'tween',
+                
+              }}
+              >&#9650;</motion.span>}
             />
             {toggleDropdown ? (
               <DropdownMenu
