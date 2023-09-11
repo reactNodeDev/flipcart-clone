@@ -7,13 +7,12 @@ import {
 } from "react-icons/md";
 import { ProductCarousel } from ".";
 import { motion, AnimatePresence } from "framer-motion";
-import useMeasure from "react-use-measure";
+import {MotionConfig} from 'framer-motion'
 
 const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLElement | null>(null);
-  const [ref, { height }] = useMeasure();
 
   const categories = useMemo(() => {
     return !data
@@ -62,25 +61,25 @@ const Categories = () => {
 
   return (
     <>
+     <MotionConfig transition={{duration:.3, repeatType:'mirror'}}>
       <motion.section
         initial={false}
         variants={parentVariants}
         animate={{
-          height: seeAll ? height : `${windowWidth > 1024 ? "20rem" : "24rem"}`,
+          height: seeAll ? 'auto' : `${windowWidth > 1024 ? "20rem" : "24rem"}`,
         }}
         ref={parentRef}
         className="overflow-hidden"
       >
         <div
           key={"parentContainer"}
-          ref={ref}
           className={`relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
         >
           {/* category by name */}
           <h3 className="font-bold text-center text-xl drop-shadow-lg">
             Shop by Category
           </h3>
-          <motion.div initial={false} key={`${seeAll}shopByCategory`}>
+          <div key={`${seeAll}shopByCategory`}>
             {visibleCategories.map((category) => {
               const { name, array } = category;
               return (
@@ -92,7 +91,7 @@ const Categories = () => {
                 />
               );
             })}
-          </motion.div>
+          </div>
 
           {/* category by gender */}
           <AnimatePresence>
@@ -149,6 +148,7 @@ const Categories = () => {
         </div>
       </motion.section>
       <ProductCarousel category="laptops" />
+      </MotionConfig>
     </>
   );
 };
