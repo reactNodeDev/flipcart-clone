@@ -73,8 +73,7 @@ const Categories = () => {
           ref={parentRef}
           className="overflow-hidden"
         >
-          <motion.div
-            layout
+          <div
             ref={ref}
             key={"parentContainer"}
             className={`relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
@@ -83,7 +82,7 @@ const Categories = () => {
             <h3 className="font-bold text-center text-xl drop-shadow-lg">
               Shop by Category
             </h3>
-            <motion.div layout key={`${seeAll}shopByCategory`}>
+            <motion.div layout initial={false} key={`${seeAll}shopByCategory`}>
               {visibleCategories.map((category) => {
                 const { name, array } = category;
                 return (
@@ -154,7 +153,7 @@ const Categories = () => {
                 }
               />
             </div>
-          </motion.div>
+          </div>
         </motion.section>
         <ProductCarousel category="laptops" />
       </MotionConfig>
