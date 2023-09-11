@@ -13,7 +13,7 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLElement | null>(null);
-
+  const ref = useRef<HTMLDivElement | null>(null)
   const categories = useMemo(() => {
     return !data
       ? []
@@ -61,17 +61,19 @@ const Categories = () => {
 
   return (
     <>
-     <MotionConfig transition={{duration:.3, repeatType:'mirror'}}>
+     <MotionConfig transition={{duration:0.3, repeatType:'mirror'}}>
       <motion.section
+        layout
         initial={false}
         variants={parentVariants}
         animate={{
-          height: seeAll ? 'auto' : `${windowWidth > 1024 ? "20rem" : "24rem"}`,
+          height: seeAll ? 'auto' : windowWidth>1024 ? '20rem' : '24rem',
         }}
         ref={parentRef}
         className="overflow-hidden"
       >
         <div
+        ref={ref}
           key={"parentContainer"}
           className={`relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
         >
@@ -102,6 +104,10 @@ const Categories = () => {
                 initial="hidden"
                 animate="visible"
                 exit="hidden"
+                transition={{
+                  duration:0.1,
+                }}
+                
               >
                 <motion.h3
                   key={"shopByGenderHeading"}
