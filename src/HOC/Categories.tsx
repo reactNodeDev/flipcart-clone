@@ -99,6 +99,7 @@ const Categories = () => {
           <AnimatePresence>
             {seeAll && (
               <motion.div
+                layoutId="shopByGenderSection"
                 key={"shopByGender"}
                 variants={parentVariants}
                 initial="hidden"
