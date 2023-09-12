@@ -60,22 +60,21 @@ const Categories = () => {
 
   return (
     <>
-      <MotionConfig transition={{ duration: 0.3, repeatType: "mirror", ease:'linear' }}>
+      <MotionConfig transition={{ duration: 0.3, repeatType:'mirror' }}>
         <motion.section
-          layout
           layoutRoot
           initial={false}
           variants={parentVariants}
           animate={{
-            height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
+            height: seeAll ? "70vh" : windowWidth > 1024 ? "20rem" : "24rem",
           }}
           ref={parentRef}
           transition={{
-            type: "tween",
+            staggerChildren:0.3
           }}
-          key={"parentContainer"}
-          className={` relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
+          
         >
+          <motion.div initial={false} layout className={`relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`} >
           {/* category by name */}
           <h3 className="font-bold text-center text-xl drop-shadow-lg">
             Shop by Category
@@ -154,6 +153,7 @@ const Categories = () => {
               }
             />
           </motion.div>
+        </motion.div>
         </motion.section>
         {/* <ProductCarousel category="laptops" /> */}
       </MotionConfig>
