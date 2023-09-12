@@ -155,7 +155,7 @@ const Categories = () => {
             />
           </motion.div>
         </motion.section>
-        <ProductCarousel category="laptops" />
+        {/* <ProductCarousel category="laptops" /> */}
       </MotionConfig>
     </>
   );
