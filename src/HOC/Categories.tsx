@@ -60,7 +60,7 @@ const Categories = () => {
 
   return (
     <>
-      <MotionConfig transition={{ duration: 0.3, repeatType: "mirror" }}>
+      <MotionConfig transition={{ duration: 0.3, repeatType: "mirror", ease:'linear' }}>
         <motion.section
           layout
           layoutRoot
