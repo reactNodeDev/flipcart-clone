@@ -66,7 +66,7 @@ const Categories = () => {
           initial={false}
           variants={parentVariants}
           animate={{
-            height: seeAll ? "70vh" : windowWidth > 1024 ? "20rem" : "24rem",
+            height: seeAll ? "150vh" : windowWidth > 1024 ? "20rem" : "24rem",
           }}
           ref={parentRef}
           transition={{
