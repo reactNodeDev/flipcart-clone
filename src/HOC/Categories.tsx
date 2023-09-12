@@ -5,7 +5,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import { ProductCarousel } from ".";
+// import { ProductCarousel } from ".";
 import { motion, AnimatePresence } from "framer-motion";
 import { MotionConfig } from "framer-motion";
 
