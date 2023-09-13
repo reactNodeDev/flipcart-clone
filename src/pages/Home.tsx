@@ -2,7 +2,7 @@ import { Categories } from "../HOC"
 
 const Home = () => {
   return (
-    <main className="">
+    <main className="h-max">
     <Categories />
     </main>
   )

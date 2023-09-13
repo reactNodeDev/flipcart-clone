@@ -2,6 +2,7 @@
     background-color: #F1F2F4;
     max-width: 100vw;
 	overflow: hidden;
+	min-height: 100vh;
 }
 
 @keyframes spinner {
