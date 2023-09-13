@@ -5,7 +5,6 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-// import { ProductCarousel } from ".";
 import {
   motion,
   AnimatePresence,
@@ -58,16 +57,9 @@ const Categories = () => {
       </section>
     );
 
-  const parentVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, height: "auto" },
-  };
-
   return (
     <>
-      <MotionConfig
-        transition={{ duration: .3, repeatType: "mirror" }}
-      >
+      <MotionConfig transition={{ duration: 0.3, repeatType: "mirror" }}>
         <LayoutGroup>
           <motion.section
             layout="position"
@@ -81,22 +73,14 @@ const Categories = () => {
               seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
             } parentSection relative mt-2 mx-4 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
           >
-            <motion.div
-              layout="position"
-              initial={false}
+            <div
               className={`p-3`}
             >
               {/* category by name */}
               <h3 className="font-bold text-center text-xl drop-shadow-lg">
                 Shop by Category
               </h3>
-              <motion.div
-                initial={false}
-                layout="position"
-                
-                transition={{ repeatType: "mirror" }}
-                key={`${seeAll}shopByCategory`}
-              >
+              <div key={`${seeAll}shopByCategory`}>
                 {visibleCategories.map((category) => {
                   const { name, array } = category;
                   return (
@@ -108,30 +92,18 @@ const Categories = () => {
                     />
                   );
                 })}
-              </motion.div>
+              </div>
 
               {/* category by gender */}
               <AnimatePresence>
                 {seeAll && (
-                  <motion.div
-                    layout="position"
-                    layoutId="shopByGenderSection"
-                    key={"shopByGender"}
-                    variants={parentVariants}
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                  >
-                    <motion.h3
+                  <div key={"shopByGender"}>
+                    <h3
                       key={"shopByGenderHeading"}
-                      variants={parentVariants}
-                      initial="hidden"
-                      animate="visible"
-                      exit="hidden"
                       className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
                     >
                       Shop by Gender
-                    </motion.h3>
+                    </h3>
                     {categoriesByGender.map((category) => {
                       const { name, array, headingClassname } = category;
                       return (
@@ -145,7 +117,7 @@ const Categories = () => {
                         />
                       );
                     })}
-                  </motion.div>
+                  </div>
                 )}
               </AnimatePresence>
 
@@ -166,7 +138,7 @@ const Categories = () => {
                   }
                 />
               </div>
-            </motion.div>
+            </div>
           </motion.section>
           <ProductCarousel category="laptops" />
         </LayoutGroup>
