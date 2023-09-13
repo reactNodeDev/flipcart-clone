@@ -79,7 +79,7 @@ const Categories = () => {
             ref={parentRef}
             className={`${
               seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
-            } parentSection relative mt-2 mx-4 p-3 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
+            } parentSection relative mt-2 mx-4 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
           >
             <motion.div
               layout="position"
