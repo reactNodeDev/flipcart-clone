@@ -9,7 +9,7 @@ import {
   motion,
   AnimatePresence,
   MotionConfig,
-  LayoutGroup,
+  // LayoutGroup,
   useWillChange,
 } from "framer-motion";
 import { ProductCarousel } from ".";
