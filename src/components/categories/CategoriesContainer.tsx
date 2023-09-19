@@ -20,13 +20,12 @@ const CategoriesContainer = ({
 }: ICategoriesContainer) => {
   return (
     <motion.div
-      layout={willExit ? "position" : "size"}
+      layout
       layoutDependency={layoutDependency?layoutDependency:null}
       initial={willExit ? { opacity: 0 } : false}
       animate={{ opacity: 1 }}
       exit={
-        // willExit ? { opacity: 0 } : { opacity: 1 }
-        { opacity: 1 }
+        willExit ? { opacity: 0 } : { opacity: 1 }
       }
     >
       <div className="my-3">

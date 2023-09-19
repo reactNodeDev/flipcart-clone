@@ -88,7 +88,7 @@ const Categories = () => {
                       dataArray={array}
                       initialAnimation={false}
                       willExit={false}
-                      layoutDependency={seeAll}
+                      layoutDependency={visibleCategories.length}
                     />
                   );
                 })}
