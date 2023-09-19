@@ -69,7 +69,7 @@ const CategoriesNew = () => {
           animate={{
             height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
           }}
-          ref={parentRef}
+        //   ref={parentRef}
           className={`${
             seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
           } parentSection relative mt-2 mx-4 bg-white overflow-hidden`}
