@@ -67,11 +67,11 @@ const CategoriesNew = () => {
           initial={false}
           animate={{
             height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
+            gridTemplateRows : seeAll ? '1fr' : '0fr',
+            transform:''
           }}
         //   ref={parentRef}
-          className={`${
-            seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
-          } parentSection relative mt-2 mx-4 bg-white overflow-hidden`}
+          className={`grid parentSection  mt-2 mx-4 bg-white overflow-hidden`}
           transition={{ duration: 0.3, repeatType: "mirror", ease:'linear' }}
         >
           <div className={`p-3`}>

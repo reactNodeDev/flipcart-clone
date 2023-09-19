@@ -66,22 +66,26 @@ const Categories = () => {
           style={{
             willChange
           }}
-          layoutRoot
+          layout
           initial={false}
           animate={{
             height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
+            translate:''
           }}
           ref={parentRef}
           className={`${
             seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
           } parentSection relative mt-2 mx-4 bg-white overflow-hidden`}
+          transition={{
+            type:'tween'
+          }}
         >
-          <div className={`p-3`}>
+          <motion.div layout className={`p-3`}>
             {/* category by name */}
             <h3 className="font-bold text-center text-xl drop-shadow-lg">
               Shop by Category
             </h3>
-            <LayoutGroup>
+            {/* <LayoutGroup> */}
               {/* <div> */}
               <AnimatePresence>
                 {visibleCategories.map((category) => {
@@ -146,8 +150,8 @@ const Categories = () => {
                   />
                 </motion.div>
               </AnimatePresence>
-            </LayoutGroup>
-          </div>
+            {/* </LayoutGroup> */}
+          </motion.div>
         </motion.section>
         <ProductCarousel category="laptops" />
       </MotionConfig>
