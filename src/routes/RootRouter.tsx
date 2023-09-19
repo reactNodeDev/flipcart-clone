@@ -6,10 +6,8 @@ import { AppErrorBoundary } from "../components";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<Navbar />} key={location.pathname}>
-      <Route path="/" ErrorBoundary={AppErrorBoundary }>
-        <Route index element={<Home />} />
-      </Route>
+    <Route path="/" element={<Navbar />} key={location.pathname} ErrorBoundary={AppErrorBoundary }>
+        <Route index element={<Home />} key={location.pathname} />
     </Route>
   )
 );

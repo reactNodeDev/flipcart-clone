@@ -1,55 +1,60 @@
-import React, { useEffect, useRef } from "react";
+import React, { FC, ReactNode, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
-import { isClickedInsideElement } from "../../utils";
 
-type ModalProps = {
-  children: React.ReactNode;
+type IModal = {
+  children: ReactNode;
+  onClose: (e: React.MouseEvent) => void;
+  show: boolean;
 };
 
-const Modal = ({ children }: ModalProps) => {
-  const dialogRef = useRef<HTMLDialogElement>(null);
+const Modal: FC<IModal> = ({ children, onClose }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const showDialog = searchParams.get("showDialog");
+  const backdropRef = useRef<HTMLDivElement>(null);
 
-  const onCloseDialog = async () => {
-    dialogRef.current?.close();
-    searchParams.delete("showDialog");
-    setSearchParams(searchParams);
-    dialogRef.current?.classList.add("hidden");
+  const onCloseModal = (e: React.MouseEvent) => {
+    if (!(e.target as Element).classList.contains("modal")) {
+      searchParams.delete("showDialog");
+      setSearchParams(searchParams);
+      onClose(e as React.MouseEvent);
+    }
   };
 
-  const onEscPressed = (e: KeyboardEvent) =>
-    e.key === "Escape" ? onCloseDialog() : null;
+  const onEscPressed = (e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      searchParams.delete("showDialog");
+      setSearchParams(searchParams);
+    }
+  };
 
   useEffect(() => {
-    if (showDialog === "true") dialogRef.current?.showModal();
-    else onCloseDialog();
-
-    dialogRef.current?.addEventListener("keydown", onEscPressed);
+    document?.addEventListener("keydown", onEscPressed);
     return () => {
-      dialogRef.current?.removeEventListener("keydown", onEscPressed);
+      document?.removeEventListener("keydown", onEscPressed);
     };
   }, [showDialog]);
 
   return (
-    <dialog
-      ref={dialogRef}
-      className=" dialog fixed h-[10rem] w-[15rem]"
-      onClose={() => {
-        console.log("closed");
-      }}
-      onClick={(e: React.MouseEvent) => {
-        if (
-          showDialog &&
-          dialogRef.current &&
-          !isClickedInsideElement(e, dialogRef.current)
-        ) {
-          onCloseDialog();
-        }
-      }}
+    <div
+      ref={backdropRef}
+      onClick={onCloseModal}
+      className="fixed top-0 left-0 w-full h-[100vh] m-0 bg-[rgba(0,0,0,0.5)] z-[10]"
     >
-      {children}
-    </dialog>
+      <motion.dialog
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -30 }}
+        open
+        className="modal top-[20%] w-[30rem] max-w-[90%] z-[11] h-[50vh]"
+        transition={{
+          duration: 0.2,
+          when: "beforeChildren",
+        }}
+      >
+        {children}
+      </motion.dialog>
+    </div>
   );
 };
 

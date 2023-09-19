@@ -60,27 +60,25 @@ const Categories = () => {
   return (
     <>
       <MotionConfig transition={{ duration: 0.3, repeatType: "mirror" }}>
-        <LayoutGroup>
-          <motion.section
-            layout="position"
-            layoutDependency={seeAll}
-            initial={false}
-            animate={{
-              height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
-            }}
-            ref={parentRef}
-            className={`${
-              seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
-            } parentSection relative mt-2 mx-4 bg-white overflow-hidden w-[calc(100vw-2.75rem)]`}
-          >
-            <div
-              className={`p-3`}
-            >
-              {/* category by name */}
-              <h3 className="font-bold text-center text-xl drop-shadow-lg">
-                Shop by Category
-              </h3>
-              <div key={`${seeAll}shopByCategory`}>
+        <motion.section
+          layoutRoot
+          initial={false}
+          animate={{
+            height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
+          }}
+          ref={parentRef}
+          className={`${
+            seeAll ? "h-auto" : windowWidth > 1024 ? "h-[20rem]" : "h-[24rem]"
+          } parentSection relative mt-2 mx-4 bg-white overflow-hidden`}
+        >
+          <div className={`p-3`}>
+            {/* category by name */}
+            <h3 className="font-bold text-center text-xl drop-shadow-lg">
+              Shop by Category
+            </h3>
+            <LayoutGroup>
+              {/* <div> */}
+              <AnimatePresence>
                 {visibleCategories.map((category) => {
                   const { name, array } = category;
                   return (
@@ -89,59 +87,64 @@ const Categories = () => {
                       categoryName={name}
                       dataArray={array}
                       initialAnimation={false}
+                      willExit={false}
+                      layoutDependency={seeAll}
                     />
                   );
                 })}
-              </div>
+                {/* </div> */}
 
-              {/* category by gender */}
-              <AnimatePresence>
                 {seeAll && (
-                  <div key={"shopByGender"}>
-                    <h3
-                      key={"shopByGenderHeading"}
-                      className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
-                    >
-                      Shop by Gender
-                    </h3>
-                    {categoriesByGender.map((category) => {
-                      const { name, array, headingClassname } = category;
-                      return (
-                        <CategoriesContainer
-                          key={name}
-                          categoryName={name}
-                          dataArray={array}
-                          headingClassname={
-                            headingClassname ? headingClassname : ""
-                          }
-                        />
-                      );
-                    })}
-                  </div>
+                  <motion.h3
+                    key={"shopByGenderHeading"}
+                    className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
+                  >
+                    Shop by Gender
+                  </motion.h3>
                 )}
-              </AnimatePresence>
 
-              {/* see-more/less button */}
-              <div className="w-full flex justify-center overflow-hidden">
-                <PrimaryButton
-                  onClick={() => {
-                    setSeeAll((seeAll) => !seeAll);
-                    const parentRefCoords = parentRef.current?.offsetTop;
-                    if (seeAll && parentRef && parentRefCoords)
-                      window.scrollTo(0, parentRefCoords - 100);
-                  }}
-                  text={seeAll ? "See Less" : "See All"}
-                  Icon={
-                    seeAll
-                      ? MdOutlineKeyboardArrowUp
-                      : MdOutlineKeyboardArrowDown
-                  }
-                />
-              </div>
-            </div>
-          </motion.section>
-          <ProductCarousel category="laptops" />
-        </LayoutGroup>
+                {/* category by gender */}
+                {seeAll &&
+                  categoriesByGender.map((category) => {
+                    const { name, array, headingClassname } = category;
+                    return (
+                      <CategoriesContainer
+                        key={name}
+                        categoryName={name}
+                        dataArray={array}
+                        headingClassname={
+                          headingClassname ? headingClassname : ""
+                        }
+                        willExit={true}
+                      />
+                    );
+                  })}
+
+                {/* see-more/less button */}
+                <motion.div
+                  key={"seeAllButton"}
+                  className=" w-full flex justify-center overflow-hidden"
+                >
+                  <PrimaryButton
+                    onClick={() => {
+                      setSeeAll((seeAll) => !seeAll);
+                      const parentRefCoords = parentRef.current?.offsetTop;
+                      if (seeAll && parentRef && parentRefCoords)
+                        window.scrollTo(0, parentRefCoords - 100);
+                    }}
+                    text={seeAll ? "See Less" : "See All"}
+                    Icon={
+                      seeAll
+                        ? MdOutlineKeyboardArrowUp
+                        : MdOutlineKeyboardArrowDown
+                    }
+                  />
+                </motion.div>
+              </AnimatePresence>
+            </LayoutGroup>
+          </div>
+        </motion.section>
+        <ProductCarousel category="laptops" />
       </MotionConfig>
     </>
   );
