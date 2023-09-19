@@ -97,12 +97,12 @@ const CategoriesNew = () => {
                 {/* </div> */}
 
                 {seeAll && (
-                  <motion.h3
+                  <h3
                     key={"shopByGenderHeading"}
                     className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
                   >
                     Shop by Gender
-                  </motion.h3>
+                  </h3>
                 )}
 
                 {/* category by gender */}
