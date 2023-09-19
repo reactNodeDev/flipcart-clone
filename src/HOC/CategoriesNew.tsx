@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import { CategoriesContainer, Loader, PrimaryButton } from "../components";
+import { Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
   MdOutlineKeyboardArrowDown,
@@ -7,11 +7,10 @@ import {
 } from "react-icons/md";
 import {
   motion,
-  AnimatePresence,
-  LayoutGroup,
   useWillChange,
 } from "framer-motion";
 import { ProductCarousel } from ".";
+import CategoriesContainerNew from "../components/categories/CategoriesContainerNew";
 
 const windowWidth = window.innerWidth;
 
@@ -80,13 +79,12 @@ const CategoriesNew = () => {
             <h3 className="font-bold text-center text-xl drop-shadow-lg">
               Shop by Category
             </h3>
-            <LayoutGroup>
+            
               {/* <div> */}
-              <AnimatePresence>
                 {visibleCategories.map((category) => {
                   const { name, array } = category;
                   return (
-                    <CategoriesContainer
+                    <CategoriesContainerNew
                       key={name}
                       categoryName={name}
                       dataArray={array}
@@ -112,7 +110,7 @@ const CategoriesNew = () => {
                   categoriesByGender.map((category) => {
                     const { name, array, headingClassname } = category;
                     return (
-                      <CategoriesContainer
+                      <CategoriesContainerNew
                         key={name}
                         categoryName={name}
                         dataArray={array}
@@ -125,7 +123,7 @@ const CategoriesNew = () => {
                   })}
 
                 {/* see-more/less button */}
-                <motion.div
+                <div
                   key={"seeAllButton"}
                   className=" w-full flex justify-center overflow-hidden"
                 >
@@ -143,9 +141,7 @@ const CategoriesNew = () => {
                         : MdOutlineKeyboardArrowDown
                     }
                   />
-                </motion.div>
-              </AnimatePresence>
-            </LayoutGroup>
+                </div>
           </div>
         </motion.section>
         <ProductCarousel category="laptops" />
