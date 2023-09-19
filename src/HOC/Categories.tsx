@@ -61,6 +61,9 @@ const Categories = () => {
     <>
       <MotionConfig transition={{ duration: 0.3, repeatType: "mirror" }}>
         <motion.section
+          style={{
+            willChange:'auto'
+          }}
           layoutRoot
           initial={false}
           animate={{
