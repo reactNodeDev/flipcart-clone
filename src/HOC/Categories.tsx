@@ -10,12 +10,14 @@ import {
   AnimatePresence,
   MotionConfig,
   LayoutGroup,
+  useWillChange,
 } from "framer-motion";
 import { ProductCarousel } from ".";
 
 const windowWidth = window.innerWidth;
 
 const Categories = () => {
+  const willChange = useWillChange()
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLElement | null>(null);
@@ -62,7 +64,7 @@ const Categories = () => {
       <MotionConfig transition={{ duration: 0.3, repeatType: "mirror", ease:'linear' }}>
         <motion.section
           style={{
-            willChange:'auto'
+            willChange
           }}
           layoutRoot
           initial={false}
