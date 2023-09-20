@@ -29,6 +29,7 @@
 .categories {
 	height : 24rem;
 	transition: height 500ms ease-in-out;
+	will-change: height;
 }
 
 .categoriesExpanded {
