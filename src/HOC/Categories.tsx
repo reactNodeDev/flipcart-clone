@@ -80,7 +80,7 @@ const Categories = () => {
             type:'tween'
           }}
         >
-          <motion.div layout className={`p-3`}>
+          <motion.div initial={false} layout className={`p-3`}>
             {/* category by name */}
             <h3 className="font-bold text-center text-xl drop-shadow-lg">
               Shop by Category

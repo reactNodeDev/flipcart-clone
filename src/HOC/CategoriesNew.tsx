@@ -5,17 +5,12 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
-import {
-  motion,
-  useWillChange,
-} from "framer-motion";
 import { ProductCarousel } from ".";
 import CategoriesContainerNew from "../components/categories/CategoriesContainerNew";
 
-const windowWidth = window.innerWidth;
+// const windowWidth = window.innerWidth;
 
 const CategoriesNew = () => {
-  const willChange = useWillChange()
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLElement | null>(null);
@@ -59,20 +54,10 @@ const CategoriesNew = () => {
 
   return (
     <>
-        <motion.section
-          style={{
-            willChange
-          }}
-          layoutRoot
-          initial={false}
-          animate={{
-            height: seeAll ? "auto" : windowWidth > 1024 ? "20rem" : "24rem",
-            gridTemplateRows : seeAll ? '1fr' : '0fr',
-            transform:''
-          }}
-        //   ref={parentRef}
-          className={`grid parentSection  mt-2 mx-4 bg-white overflow-hidden`}
-          transition={{ duration: 0.3, repeatType: "mirror", ease:'linear' }}
+        <section
+         
+          ref={parentRef}
+          className={`categories grid parentSection  mt-2 mx-4 bg-white overflow-hidden`}
         >
           <div className={`p-3`}>
             {/* category by name */}
@@ -129,10 +114,14 @@ const CategoriesNew = () => {
                 >
                   <PrimaryButton
                     onClick={() => {
+                        // const categoriesParent = document.getElementsByClassName('.categories')
                       setSeeAll((seeAll) => !seeAll);
+                      if(!seeAll) { parentRef.current?.classList.add('categoriesExpanded') }
                       const parentRefCoords = parentRef.current?.offsetTop;
-                      if (seeAll && parentRef && parentRefCoords)
-                        window.scrollTo(0, parentRefCoords - 100);
+                      if (seeAll && parentRef && parentRefCoords) {
+                          window.scrollTo(0, parentRefCoords - 100);
+                          parentRef.current?.classList.remove('categoriesExpanded')
+                      }
                     }}
                     text={seeAll ? "See Less" : "See All"}
                     Icon={
@@ -143,7 +132,7 @@ const CategoriesNew = () => {
                   />
                 </div>
           </div>
-        </motion.section>
+        </section>
         <ProductCarousel category="laptops" />
     </>
   );
