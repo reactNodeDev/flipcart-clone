@@ -1,11 +1,9 @@
-// import { Categories } from "../HOC"
-import CategoriesNew from "../HOC/CategoriesNew"
+import { Categories } from "../HOC"
 
 const Home = () => {
   return (
     <main className="h-max">
-    {/* <Categories /> */}
-    <CategoriesNew />
+    <Categories />
     </main>
   )
 }
