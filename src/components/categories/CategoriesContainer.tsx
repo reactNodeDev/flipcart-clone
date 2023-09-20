@@ -19,21 +19,23 @@ const CategoriesContainerNew = ({
 }: ICategoriesContainer) => {
 
   return (
-    <motion.div
-      layout
-      initial={willExit ? { opacity: 0 } : false}
+    <motion.li
+      layout='preserve-aspect'
+      key={categoryName}
+      initial={willExit ? { opacity: 0, height:0} : false}
       animate={{
         opacity: 1,
+        height:'auto'
       }}
-      exit={willExit ? { opacity: 0 } : { opacity: 1 }}
+      exit={willExit ? { opacity: 0, height:0} : { opacity: 1 }}
       transition={{
-
+        duration:.2,
       }}
     >
-      <div className="my-3">
-        <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
+      <div className="">
+        <motion.h3 layout className={`${headingClassname} mb-2 font-semibold text-xl`}>
           {categoryName}
-        </h3>
+        </motion.h3>
         <div className="grid grid-cols-12 items-center gap-3">
           {dataArray?.map((category: string) => {
             return (
@@ -42,7 +44,7 @@ const CategoriesContainerNew = ({
           })}
         </div>
       </div>
-    </motion.div>
+    </motion.li>
   );
 };
 
