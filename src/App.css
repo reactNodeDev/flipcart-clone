@@ -27,11 +27,10 @@
 }
 
 .categories {
-	height : 24rem;
+	height : 20rem;
 	transition: height 500ms ease;
-	will-change: contents;
 }
 
 .categoriesExpanded {
-	height : 2000px
+	height : 1500px;
 }

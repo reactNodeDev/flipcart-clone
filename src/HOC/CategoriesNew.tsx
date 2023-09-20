@@ -54,88 +54,89 @@ const CategoriesNew = () => {
 
   return (
     <>
-        <section
-         
-          ref={parentRef}
-          className={`categories grid parentSection  mt-2 mx-4 bg-white overflow-hidden`}
-        >
-          <div className={`p-3`}>
-            {/* category by name */}
-            <h3 className="font-bold text-center text-xl drop-shadow-lg">
-              Shop by Category
+      <section
+        ref={parentRef}
+        className={`relative categories grid parentSection  mt-2 mx-4 bg-white overflow-hidden`}
+        style={{
+          willChange: "height",
+        }}
+      >
+        <div className={` p-3`}>
+          {/* category by name */}
+          <h3 className="font-bold text-center text-xl drop-shadow-lg">
+            Shop by Category
+          </h3>
+
+          {/* <div> */}
+          {visibleCategories.map((category) => {
+            const { name, array } = category;
+            return (
+              <CategoriesContainerNew
+                key={name}
+                categoryName={name}
+                dataArray={array}
+                initialAnimation={false}
+                willExit={false}
+                layoutDependency={visibleCategories.length}
+              />
+            );
+          })}
+          {/* </div> */}
+
+          {/* {seeAll && ( */}
+            <h3
+              key={"shopByGenderHeading"}
+              className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
+            >
+              Shop by Gender
             </h3>
-            
-              {/* <div> */}
-                {visibleCategories.map((category) => {
-                  const { name, array } = category;
-                  return (
-                    <CategoriesContainerNew
-                      key={name}
-                      categoryName={name}
-                      dataArray={array}
-                      initialAnimation={false}
-                      willExit={false}
-                      layoutDependency={visibleCategories.length}
-                    />
-                  );
-                })}
-                {/* </div> */}
+          {/* )} */}
 
-                {seeAll && (
-                  <h3
-                    key={"shopByGenderHeading"}
-                    className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
-                  >
-                    Shop by Gender
-                  </h3>
-                )}
+          {/* category by gender */}
+          {/* {seeAll && */}
+            {categoriesByGender.map((category) => {
+              const { name, array, headingClassname } = category;
+              return (
+                <CategoriesContainerNew
+                  key={name}
+                  categoryName={name}
+                  dataArray={array}
+                  headingClassname={headingClassname ? headingClassname : ""}
+                  willExit={true}
+                />
+              );
+            })}
+             {/* } */}
 
-                {/* category by gender */}
-                {seeAll &&
-                  categoriesByGender.map((category) => {
-                    const { name, array, headingClassname } = category;
-                    return (
-                      <CategoriesContainerNew
-                        key={name}
-                        categoryName={name}
-                        dataArray={array}
-                        headingClassname={
-                          headingClassname ? headingClassname : ""
-                        }
-                        willExit={true}
-                      />
-                    );
-                  })}
-
-                {/* see-more/less button */}
-                <div
-                  key={"seeAllButton"}
-                  className=" w-full flex justify-center overflow-hidden"
-                >
-                  <PrimaryButton
-                    onClick={() => {
-                        // const categoriesParent = document.getElementsByClassName('.categories')
-                      setSeeAll((seeAll) => !seeAll);
-                      if(!seeAll) { parentRef.current?.classList.add('categoriesExpanded') }
-                      const parentRefCoords = parentRef.current?.offsetTop;
-                      if (seeAll && parentRef && parentRefCoords) {
-                          window.scrollTo(0, parentRefCoords - 100);
-                          parentRef.current?.classList.remove('categoriesExpanded')
-                      }
-                    }}
-                    text={seeAll ? "See Less" : "See All"}
-                    Icon={
-                      seeAll
-                        ? MdOutlineKeyboardArrowUp
-                        : MdOutlineKeyboardArrowDown
-                    }
-                  />
-                </div>
+          {/* see-more/less button */}
+          <div
+            key={"seeAllButton"}
+            className="absolute bottom-0 z-[10000] w-full flex justify-center overflow-hidden bg-[rgba(0,0,0,0.5)]"
+          >
+            <PrimaryButton
+              onClick={() => {
+                if (!seeAll) {
+                  parentRef.current?.classList.add("categoriesExpanded");
+                }
+                // const categoriesParent = document.getElementsByClassName('.categories')
+                setSeeAll((seeAll) => !seeAll);
+                const parentRefCoords = parentRef.current?.offsetTop;
+                if (seeAll && parentRef && parentRefCoords) {
+                  window.scrollTo(0, parentRefCoords - 100);
+                  parentRef.current?.classList.remove("categoriesExpanded");
+                }
+              }}
+              text={seeAll ? "See Less" : "See All"}
+              Icon={
+                seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
+              }
+            />
           </div>
-        </section>
-        <ProductCarousel category="laptops" />
+        </div>
+      </section>
+      <ProductCarousel category="laptops" />
     </>
   );
 };
 
-export default CategoriesNew
+export default CategoriesNew;
