@@ -52,17 +52,13 @@ const CategoriesNew = () => {
 
   return (
     <>
-      <section className="p-3">
+      <section className="pb-3">
         <motion.div
           ref={parentRef}
-          className={` bg-white overflow-hidden rounded-md p-3`}
+          className={` bg-white overflow-hidden rounded-md px-5`}
           layout="size"
           layoutRoot
           initial={false}
-          transition={{
-            type: "tween",
-            repeatType: "reverse",
-          }}
         >
           {/* category by name */}
           <motion.h3
@@ -120,9 +116,9 @@ const CategoriesNew = () => {
                   );
                 })}
 
-              {/* see-more/less button */}
             </AnimatePresence>
           </ul>
+              {/* see-more/less button */}
           <motion.div
             layout="position"
             layoutRoot
@@ -137,7 +133,6 @@ const CategoriesNew = () => {
                 const parentRefCoords = parentRef.current?.offsetTop;
                 if (seeAll && parentRef && parentRefCoords) {
                   window.scrollTo(0, parentRefCoords - 100);
-                  parentRef.current?.classList.remove("categoriesExpanded");
                 }
               }}
               text={seeAll ? "See Less" : "See All"}

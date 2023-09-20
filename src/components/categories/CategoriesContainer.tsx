@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
 import { motion } from "framer-motion";
+import useMeasure from "react-use-measure";
 
 interface ICategoriesContainer {
   dataArray: string[];
@@ -17,24 +18,26 @@ const CategoriesContainerNew = ({
   headingClassname,
   willExit,
 }: ICategoriesContainer) => {
-
+      const [ref, {height}]  = useMeasure()
   return (
     <motion.li
-      layout='preserve-aspect'
+      layout
       key={categoryName}
-      initial={willExit ? { opacity: 0} : false}
+      initial={willExit ? { opacity: 0, height:0} : false}
       animate={{
         opacity: 1,
+        height:height
       }}
-      exit={willExit ? { opacity: 0, height:0} : { opacity: 1 }}
+      // exit={willExit ? { opacity: 1} : { opacity: 1 }}
+      exit={willExit ? { opacity: 0, height:0 }:{ opacity: 1 }}
       transition={{
-        duration:.2,
+        duration:.3,
       }}
     >
-      <div className="">
-        <motion.h3 layout className={`${headingClassname} mb-2 font-semibold text-xl`}>
+      <div ref={ref} className="">
+        <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
           {categoryName}
-        </motion.h3>
+        </h3>
         <div className="grid grid-cols-12 items-center gap-3">
           {dataArray?.map((category: string) => {
             return (
