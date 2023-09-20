@@ -22,10 +22,9 @@ const CategoriesContainerNew = ({
     <motion.li
       layout='preserve-aspect'
       key={categoryName}
-      initial={willExit ? { opacity: 0, height:0} : false}
+      initial={willExit ? { opacity: 0} : false}
       animate={{
         opacity: 1,
-        height:'auto'
       }}
       exit={willExit ? { opacity: 0, height:0} : { opacity: 1 }}
       transition={{
