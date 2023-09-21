@@ -1,5 +1,7 @@
-import { useState, useMemo, useRef } from "react";
-import { CategoriesContainer, Loader, PrimaryButton } from "../components";
+// import { useState, useMemo, useRef } from "react";
+import { useState, useRef } from "react";
+// import { CategoriesContainer, Loader, PrimaryButton } from "../components";
+import { Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
   MdOutlineKeyboardArrowDown,
@@ -9,40 +11,40 @@ import { ProductCarousel } from ".";
 import { AnimatePresence, motion, useWillChange } from "framer-motion";
 
 const CategoriesNew = () => {
-  const willChange = useWillChange()
+  const willChange = useWillChange();
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  const categories = useMemo(() => {
-    return !data
-      ? []
-      : [
-          { name: "Electronics", array: [data[0], data[1]] },
-          { name: "Self Care", array: [data[2], data[3], data[16]] },
-          { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
-          { name: "Clothes", array: [data[7]] },
-          { name: "Auto", array: [data[17], data[18]] },
-        ];
-  }, [data]);
+  // const categories = useMemo(() => {
+  //   return !data
+  //     ? []
+  //     : [
+  //         { name: "Electronics", array: [data[0], data[1]] },
+  //         { name: "Self Care", array: [data[2], data[3], data[16]] },
+  //         { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
+  //         { name: "Clothes", array: [data[7]] },
+  //         { name: "Auto", array: [data[17], data[18]] },
+  //       ];
+  // }, [data]);
 
-  const categoriesByGender = useMemo(() => {
-    return !data
-      ? []
-      : [
-          {
-            name: "Women",
-            array: [data[8], data[9], data[13], data[14], data[15]],
-            headingClassname: "text-pink-700 text-center",
-          },
-          {
-            name: "Men",
-            array: [data[10], data[11], data[12]],
-            headingClassname: "text-red-700 text-center",
-          },
-        ];
-  }, [data]);
+  // const categoriesByGender = useMemo(() => {
+  //   return !data
+  //     ? []
+  //     : [
+  //         {
+  //           name: "Women",
+  //           array: [data[8], data[9], data[13], data[14], data[15]],
+  //           headingClassname: "text-pink-700 text-center",
+  //         },
+  //         {
+  //           name: "Men",
+  //           array: [data[10], data[11], data[12]],
+  //           headingClassname: "text-red-700 text-center",
+  //         },
+  //       ];
+  // }, [data]);
 
-  const visibleCategories = seeAll ? categories : categories.slice(0, 2);
+  // const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
   if (!data)
     return (
@@ -61,9 +63,9 @@ const CategoriesNew = () => {
           layoutRoot
           initial={false}
           transition={{
-            duration:0.5
+            duration: 0.3,
           }}
-          style={{willChange}}
+          style={{ willChange }}
         >
           <AnimatePresence>
             {seeAll && (
@@ -73,7 +75,7 @@ const CategoriesNew = () => {
                 animate={{ opacity: 1, height: "4rem" }}
                 className="w-full h-[4rem] border-2 border-black"
                 transition={{
-                  delay:0.5
+                  delay: 0.3,
                 }}
               ></motion.div>
             )}
@@ -85,9 +87,9 @@ const CategoriesNew = () => {
           >
             Shop by Category
           </motion.h3>
-          <ul className="w-full gap-y-2">
-            <AnimatePresence initial={false} mode="popLayout">
-              {visibleCategories.map((category, index) => {
+          {/* <ul className="w-full gap-y-2"> */}
+          {/* <AnimatePresence initial={false} mode="popLayout"> */}
+          {/* {visibleCategories.map((category, index) => {
                 const { name, array } = category;
                 return (
                   // <div key={name} className="my-3">
@@ -101,8 +103,8 @@ const CategoriesNew = () => {
                   />
                   // </div>
                 );
-              })}
-              {seeAll && (
+              })} */}
+          {/* {seeAll && (
                 <motion.h3
                   layout
                   key={"shopByGenderHeading"}
@@ -115,10 +117,10 @@ const CategoriesNew = () => {
                 >
                   Shop by Gender
                 </motion.h3>
-              )}
+              )} */}
 
-              {/* category by gender */}
-              {seeAll &&
+          {/* category by gender */}
+          {/* {seeAll &&
                 categoriesByGender.map((category) => {
                   const { name, array, headingClassname } = category;
                   return (
@@ -132,9 +134,10 @@ const CategoriesNew = () => {
                       willExit={true}
                     />
                   );
-                })}
-            </AnimatePresence>
-          </ul>
+                })} */}
+          {/* </AnimatePresence> */}
+          {/* </ul> */}
+
           {/* see-more/less button */}
           <motion.div
             layout="position"
