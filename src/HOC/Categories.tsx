@@ -6,9 +6,10 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useWillChange } from "framer-motion";
 
 const CategoriesNew = () => {
+  const willChange = useWillChange()
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -62,6 +63,7 @@ const CategoriesNew = () => {
           transition={{
             duration:0.5
           }}
+          style={{willChange}}
         >
           <AnimatePresence>
             {seeAll && (

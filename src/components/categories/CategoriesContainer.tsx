@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
-import { motion } from "framer-motion";
+import { motion, useWillChange } from "framer-motion";
 import useMeasure from "react-use-measure";
 
 interface ICategoriesContainer {
@@ -18,17 +18,19 @@ const CategoriesContainerNew = ({
   headingClassname,
   willExit,
 }: ICategoriesContainer) => {
+  const willChange = useWillChange()
       const [ref]  = useMeasure()
   return (
     <motion.li
+    style={{willChange}}
       layout
       key={categoryName}
-      initial={willExit ? { opacity: 0} : false}
-      animate={{
+      initial={willExit ? { opacity: 0, height:0} : false}
+      animate={willExit ? {
         opacity: 1,
-      }}
-      // exit={willExit ? { opacity: 1} : { opacity: 1 }}
-      exit={willExit ? { opacity: 0 }:{ opacity: 1 }}
+        height:'auto'
+      }:{}}
+      exit={willExit ? { opacity: 0, height:0 }:{ opacity: 1 }}
       transition={{
         duration:.3,
       }}
