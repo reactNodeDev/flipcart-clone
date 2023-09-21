@@ -57,6 +57,10 @@ const CategoriesNew = () => {
     collapsed: { height: 0, opacity: 0 },
   };
 
+
+  const collapsedCategories = categories.slice(0, 2)
+  const expandedCategories = categories.slice(2, categories.length)
+
   if (!data)
     return (
       <section className="h-[10rem] relative mt-2 mx-4 w-[calc(100vw-2.75rem)] bg-white p-3 overflow-hidden  flex items-center justify-center">
@@ -67,7 +71,7 @@ const CategoriesNew = () => {
   return (
     <>
       <MotionConfig
-        transition={{ duration: 0.3, type: "tween", ease: "linear" }}
+        transition={{ duration: 0.3, type: "tween", ease: "linear", repeatType:'mirror' }}
       >
         <section ref={parentRef} className="relative">
           <div className={`bg-white overflow-hidden rounded-md px-5`}>
@@ -75,7 +79,7 @@ const CategoriesNew = () => {
             <h3 className="font-bold text-center text-xl drop-shadow-lg">
               Shop by Category
             </h3>
-            {categories.slice(0, 2).map((category) => {
+            {collapsedCategories.slice(0, 2).map((category) => {
               const { name, array } = category;
               return (
                 <CategoriesContainer
@@ -91,16 +95,13 @@ const CategoriesNew = () => {
                 {seeAll && (
                   <motion.div
                     variants={variants}
-                    className="border-2 border-black"
                     key={"expandedCategoryContainer"}
                     initial={"collapsed"}
                     animate={"open"}
                     exit={"collapsed"}
                   >
                     <div className="p-3">
-                      {categories
-                        .slice(2, categories.length)
-                        .map((category) => {
+                      {expandedCategories.map((category) => {
                           const { name, array } = category;
                           return (
                             <CategoriesContainer
