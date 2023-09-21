@@ -29,27 +29,28 @@ const Categories = () => {
         ];
   }, [data]);
 
-  // const categoriesByGender = !data
-  //     ? []
-  //     : [
-  //         {
-  //           name: "Women",
-  //           array: [data[8], data[9], data[13], data[14], data[15]],
-  //           headingClassname: "text-pink-700 text-center",
-  //         },
-  //         {
-  //           name: "Men",
-  //           array: [data[10], data[11], data[12]],
-  //           headingClassname: "text-red-700 text-center",
-  //         },
-  //       ];
+  const categoriesByGender = !data
+      ? []
+      : [
+          {
+            name: "Women",
+            array: [data[8], data[9], data[13], data[14], data[15]],
+            headingClassname: "text-pink-700 text-center",
+          },
+          {
+            name: "Men",
+            array: [data[10], data[11], data[12]],
+            headingClassname: "text-red-700 text-center",
+          },
+        ];
 
   const variants = {
     open: {
-      height: "auto",
+      // height: "auto",
       opacity: 1,
     },
-    collapsed: { height: 0, opacity: 0 },
+    // collapsed: { height: 0, opacity: 0 },
+    collapsed: {  opacity: 0 },
   };
 
   const collapsedCategories = categories.slice(0, 2);
@@ -92,6 +93,7 @@ const Categories = () => {
                   exit={"collapsed"}
                   transition={{
                     duration: 0.3,
+                    type:'just'
                   }}
                   style={{
                     transformOrigin:'top center',
@@ -110,7 +112,7 @@ const Categories = () => {
                         />
                       );
                     })}
-                    {/* <motion.div
+                    <motion.div
                       variants={{
                         collapsed: { scale: 0.8 },
                         open: { scale: 1 },
@@ -136,7 +138,7 @@ const Categories = () => {
                           }
                         />
                       );
-                    })} */}
+                    })}
                   </div>
                 </motion.div>
               )}
