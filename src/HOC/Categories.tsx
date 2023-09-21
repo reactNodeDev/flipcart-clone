@@ -33,33 +33,31 @@ const Categories = () => {
         ];
   }, [data]);
 
-  // const categoriesByGender = useMemo(() => {
-  //   return !data
-  //     ? []
-  //     : [
-  //         {
-  //           name: "Women",
-  //           array: [data[8], data[9], data[13], data[14], data[15]],
-  //           headingClassname: "text-pink-700 text-center",
-  //         },
-  //         {
-  //           name: "Men",
-  //           array: [data[10], data[11], data[12]],
-  //           headingClassname: "text-red-700 text-center",
-  //         },
-  //       ];
-  // }, [data]);
+  const categoriesByGender = !data
+      ? []
+      : [
+          {
+            name: "Women",
+            array: [data[8], data[9], data[13], data[14], data[15]],
+            headingClassname: "text-pink-700 text-center",
+          },
+          {
+            name: "Men",
+            array: [data[10], data[11], data[12]],
+            headingClassname: "text-red-700 text-center",
+          },
+        ];
 
   const variants = {
     open: {
-      height: "500px",
+      height: "auto",
       opacity: 1,
     },
     collapsed: { height: 0, opacity: 0 },
   };
 
   const collapsedCategories = categories.slice(0, 2);
-  // const expandedCategories = categories.slice(2, categories.length);
+  const expandedCategories = categories.slice(2, categories.length);
 
   if (!data)
     return (
@@ -105,10 +103,14 @@ const Categories = () => {
                   animate={"open"}
                   exit={"collapsed"}
                   transition={{
-                    duration: 0.5,
+                    duration: 0.3,
+                  }}
+                  style={{
+                    transformOrigin:'top center',
+                    willChange:'contents'
                   }}
                 >
-                  {/* <div ref={ref} className="p-3">
+                  <div className="p-3">
                     {expandedCategories.map((category) => {
                       const { name, array } = category;
                       return (
@@ -125,7 +127,7 @@ const Categories = () => {
                         collapsed: { scale: 0.8 },
                         open: { scale: 1 },
                       }}
-                      transition={{ duration: 0.5 }}
+                      transition={{ duration: 0.3 }}
                     >
                       <h3
                         key={"shopByGenderHeading"}
@@ -147,7 +149,7 @@ const Categories = () => {
                         />
                       );
                     })}
-                  </div> */}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

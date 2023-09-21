@@ -19,7 +19,7 @@ const CategoriesContainerNew = ({
   return (
     <motion.div
       variants={{ collapsed: { scale: 0.95 }, open: { scale: 1 } }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.3 }}
     >
       <div className="my-2">
         <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
