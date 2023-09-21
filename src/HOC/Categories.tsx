@@ -8,7 +8,7 @@ import {
 import { ProductCarousel } from ".";
 import {
   AnimatePresence,
-  MotionConfig,
+  // MotionConfig,
   motion,
 } from "framer-motion";
 
@@ -64,14 +64,6 @@ const Categories = () => {
 
   return (
     <>
-      <MotionConfig
-        transition={{
-          duration: 0.3,
-          type: "tween",
-          ease: "linear",
-          repeatType: "mirror",
-        }}
-      >
         <section ref={parentRef} className="relative">
           <div className={`bg-white overflow-hidden rounded-md px-5`}>
             {/* category by name */}
@@ -173,7 +165,6 @@ const Categories = () => {
           />
         </motion.div>
         <ProductCarousel category="laptops" />
-      </MotionConfig>
     </>
   );
 };
