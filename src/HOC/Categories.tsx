@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import useMeasure from "react-use-measure";
+// import useMeasure from "react-use-measure";
 import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { ProductCarousel } from ".";
 import {
-  AnimatePresence,
+  // AnimatePresence,
   MotionConfig,
   motion,
   // useWillChange,
@@ -16,7 +16,7 @@ import {
 
 const Categories = () => {
   // const [ref, {height}] = useMeasure()
-  const [ref] = useMeasure();
+  // const [ref] = useMeasure();
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -33,33 +33,33 @@ const Categories = () => {
         ];
   }, [data]);
 
-  const categoriesByGender = useMemo(() => {
-    return !data
-      ? []
-      : [
-          {
-            name: "Women",
-            array: [data[8], data[9], data[13], data[14], data[15]],
-            headingClassname: "text-pink-700 text-center",
-          },
-          {
-            name: "Men",
-            array: [data[10], data[11], data[12]],
-            headingClassname: "text-red-700 text-center",
-          },
-        ];
-  }, [data]);
+  // const categoriesByGender = useMemo(() => {
+  //   return !data
+  //     ? []
+  //     : [
+  //         {
+  //           name: "Women",
+  //           array: [data[8], data[9], data[13], data[14], data[15]],
+  //           headingClassname: "text-pink-700 text-center",
+  //         },
+  //         {
+  //           name: "Men",
+  //           array: [data[10], data[11], data[12]],
+  //           headingClassname: "text-red-700 text-center",
+  //         },
+  //       ];
+  // }, [data]);
 
-  const variants = {
-    open: {
-      height: "500px",
-      opacity: 1,
-    },
-    collapsed: { height: 0, opacity: 0 },
-  };
+  // const variants = {
+  //   open: {
+  //     height: "500px",
+  //     opacity: 1,
+  //   },
+  //   collapsed: { height: 0, opacity: 0 },
+  // };
 
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = categories.slice(2, categories.length);
+  // const expandedCategories = categories.slice(2, categories.length);
 
   if (!data)
     return (
@@ -96,7 +96,7 @@ const Categories = () => {
               );
             })}
 
-            <AnimatePresence initial={false}>
+            {/* <AnimatePresence initial={false}>
               {seeAll && (
                 <motion.div
                   variants={variants}
@@ -150,7 +150,7 @@ const Categories = () => {
                   </div>
                 </motion.div>
               )}
-            </AnimatePresence>
+            </AnimatePresence> */}
 
             {/* see-more/less button */}
           </div>
