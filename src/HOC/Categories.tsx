@@ -42,7 +42,7 @@ const CategoriesNew = () => {
         ];
   }, [data]);
 
-  const visibleCategories = seeAll ? categories : categories.slice(0, 2);
+  // const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
   if (!data)
     return (
