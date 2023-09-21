@@ -1,7 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
 import { motion } from "framer-motion";
-// import useMeasure from "react-use-measure";
 
 interface ICategoriesContainer {
   dataArray: string[];
@@ -20,16 +19,16 @@ const CategoriesContainerNew = ({
 ICategoriesContainer) => {
   return (
     <motion.li>
-      <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
+      <motion.h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
-      </h3>
-      <div className="grid grid-cols-12 items-center gap-3">
+      </motion.h3>
+      <motion.div className="grid grid-cols-12 items-center gap-3">
         {dataArray?.map((category: string) => {
           return (
             <CategoryButton key={category} name={category?.toUpperCase()} />
           );
         })}
-      </div>
+      </motion.div>
     </motion.li>
   );
 };

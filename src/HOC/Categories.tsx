@@ -92,7 +92,7 @@ const CategoriesNew = () => {
                   <motion.div
                     variants={variants}
                     className="border-2 border-black"
-                    key={"categoryName"}
+                    key={"expandedCategoryContainer"}
                     initial={"collapsed"}
                     animate={"open"}
                     exit={"collapsed"}
