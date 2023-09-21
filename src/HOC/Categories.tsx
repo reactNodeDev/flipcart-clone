@@ -67,7 +67,7 @@ const CategoriesNew = () => {
   return (
     <>
       <MotionConfig
-        transition={{ duration: 0.5, type: "tween", ease: "linear" }}
+        transition={{ duration: 0.3, type: "tween", ease: "linear" }}
       >
         <section ref={parentRef} className="relative">
           <div className={`bg-white overflow-hidden rounded-md px-5`}>
@@ -111,37 +111,12 @@ const CategoriesNew = () => {
                             />
                           );
                         })}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              <AnimatePresence>
-                {seeAll && (
-                  <motion.h3
-                    key={"shopByGenderHeading"}
-                    variants={variants}
-                    initial={"collapsed"}
-                    animate={"open"}
-                    exit={"collapsed"}
-                    className="border-2 border-black font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                    transition={{}}
-                  >
-                    Shop by Gender
-                  </motion.h3>
-                )}
-
-                {/* category by gender */}
-                {seeAll && (
-                  <motion.div
-                    variants={variants}
-                    className="border-2 border-black"
-                    key={"categoryName"}
-                    initial={"collapsed"}
-                    animate={"open"}
-                    exit={"collapsed"}
-                  >
-                    <div className="p-3">
+                      <motion.h3
+                        key={"shopByGenderHeading"}
+                        className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
+                      >
+                        Shop by Gender
+                      </motion.h3>
                       {categoriesByGender.map((category) => {
                         const { name, array, headingClassname } = category;
                         return (

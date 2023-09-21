@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
-// import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 // import useMeasure from "react-use-measure";
 
 interface ICategoriesContainer {
@@ -19,7 +19,7 @@ const CategoriesContainerNew = ({
 }: 
 ICategoriesContainer) => {
   return (
-    <li>
+    <motion.li>
       <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
       </h3>
@@ -30,7 +30,7 @@ ICategoriesContainer) => {
           );
         })}
       </div>
-    </li>
+    </motion.li>
   );
 };
 
