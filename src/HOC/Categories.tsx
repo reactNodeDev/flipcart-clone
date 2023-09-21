@@ -9,7 +9,8 @@ import { ProductCarousel } from ".";
 import {
   AnimatePresence,
   // MotionConfig,
-  motion,
+  // motion,
+  m
 } from "framer-motion";
 
 const Categories = () => {
@@ -84,7 +85,7 @@ const Categories = () => {
 
             <AnimatePresence initial={false}>
               {seeAll && (
-                <motion.div
+                <m.div
                   variants={variants}
                   key={"expandedCategoryContainer"}
                   initial={"collapsed"}
@@ -110,7 +111,7 @@ const Categories = () => {
                         />
                       );
                     })}
-                    <motion.div
+                    <m.div
                       variants={{
                         collapsed: { scale: 0.8 },
                         open: { scale: 1 },
@@ -123,7 +124,7 @@ const Categories = () => {
                       >
                         Shop by Gender
                       </h3>
-                    </motion.div>
+                    </m.div>
                     {categoriesByGender.map((category) => {
                       const { name, array, headingClassname } = category;
                       return (
@@ -138,14 +139,14 @@ const Categories = () => {
                       );
                     })}
                   </div>
-                </motion.div>
+                </m.div>
               )}
             </AnimatePresence>
 
             {/* see-more/less button */}
           </div>
         </section>
-        <motion.div
+        <m.div
           initial={false}
           key={"seeAllButton"}
           className={`w-full flex justify-center overflow-hidden`}
@@ -163,7 +164,7 @@ const Categories = () => {
               seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
             }
           />
-        </motion.div>
+        </m.div>
         <ProductCarousel category="laptops" />
     </>
   );
