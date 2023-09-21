@@ -8,7 +8,6 @@ import {
 import { ProductCarousel } from ".";
 import {
   AnimatePresence,
-  // MotionConfig,
   motion,
 } from "framer-motion";
 
