@@ -25,17 +25,16 @@ const CategoriesContainerNew = ({
     style={{willChange}}
       layout
       key={categoryName}
-      initial={willExit ? { opacity: 0, height:0} : false}
+      initial={willExit ? { opacity: 0} : false}
       animate={willExit ? {
         opacity: 1,
-        height:'auto'
       }:{}}
-      exit={willExit ? { opacity: 0, height:0 }:{ opacity: 1 }}
+      exit={willExit ? { opacity: 0}:{ opacity: 1 }}
       transition={{
         duration:.3,
       }}
     >
-      <div ref={ref} className="">
+      <div ref={ref} className="origin-top-left">
         <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
           {categoryName}
         </h3>

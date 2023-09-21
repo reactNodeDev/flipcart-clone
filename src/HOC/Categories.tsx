@@ -1,7 +1,5 @@
-// import { useState, useMemo, useRef } from "react";
-import { useState, useRef } from "react";
-// import { CategoriesContainer, Loader, PrimaryButton } from "../components";
-import { Loader, PrimaryButton } from "../components";
+import { useState, useMemo, useRef } from "react";
+import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
   MdOutlineKeyboardArrowDown,
@@ -15,36 +13,36 @@ const CategoriesNew = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  // const categories = useMemo(() => {
-  //   return !data
-  //     ? []
-  //     : [
-  //         { name: "Electronics", array: [data[0], data[1]] },
-  //         { name: "Self Care", array: [data[2], data[3], data[16]] },
-  //         { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
-  //         { name: "Clothes", array: [data[7]] },
-  //         { name: "Auto", array: [data[17], data[18]] },
-  //       ];
-  // }, [data]);
+  const categories = useMemo(() => {
+    return !data
+      ? []
+      : [
+          { name: "Electronics", array: [data[0], data[1]] },
+          { name: "Self Care", array: [data[2], data[3], data[16]] },
+          { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
+          { name: "Clothes", array: [data[7]] },
+          { name: "Auto", array: [data[17], data[18]] },
+        ];
+  }, [data]);
 
-  // const categoriesByGender = useMemo(() => {
-  //   return !data
-  //     ? []
-  //     : [
-  //         {
-  //           name: "Women",
-  //           array: [data[8], data[9], data[13], data[14], data[15]],
-  //           headingClassname: "text-pink-700 text-center",
-  //         },
-  //         {
-  //           name: "Men",
-  //           array: [data[10], data[11], data[12]],
-  //           headingClassname: "text-red-700 text-center",
-  //         },
-  //       ];
-  // }, [data]);
+  const categoriesByGender = useMemo(() => {
+    return !data
+      ? []
+      : [
+          {
+            name: "Women",
+            array: [data[8], data[9], data[13], data[14], data[15]],
+            headingClassname: "text-pink-700 text-center",
+          },
+          {
+            name: "Men",
+            array: [data[10], data[11], data[12]],
+            headingClassname: "text-red-700 text-center",
+          },
+        ];
+  }, [data]);
 
-  // const visibleCategories = seeAll ? categories : categories.slice(0, 2);
+  const visibleCategories = seeAll ? categories : categories.slice(0, 2);
 
   if (!data)
     return (
@@ -55,35 +53,22 @@ const CategoriesNew = () => {
 
   return (
     <>
-      <section className="pb-3">
+      <section className=" relative">
         <motion.div
           ref={parentRef}
-          className={` bg-white overflow-hidden rounded-md px-5`}
+          className={`bg-white overflow-hidden rounded-md px-5`}
           layout="size"
           layoutRoot
           initial={false}
           animate={{
-            height:seeAll ? '100vh' : '30vh'
+            height:seeAll ? '130vh' : '40vh'
           }}
           transition={{
-            duration: 0.3,
-
+            duration: .3,
+            when:'beforeChildren'
           }}
           style={{ willChange }}
         >
-          <AnimatePresence>
-            {seeAll && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                exit={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "4rem" }}
-                className="w-full h-[4rem] border-2 border-black"
-                transition={{
-                  delay: 0.3,
-                }}
-              ></motion.div>
-            )}
-          </AnimatePresence>
           {/* category by name */}
           <motion.h3
             initial={false}
@@ -91,9 +76,9 @@ const CategoriesNew = () => {
           >
             Shop by Category
           </motion.h3>
-          {/* <ul className="w-full gap-y-2"> */}
-          {/* <AnimatePresence initial={false} mode="popLayout"> */}
-          {/* {visibleCategories.map((category, index) => {
+          <ul className="w-full gap-y-2">
+          <AnimatePresence initial={false} mode="popLayout">
+          {visibleCategories.map((category, index) => {
                 const { name, array } = category;
                 return (
                   // <div key={name} className="my-3">
@@ -107,8 +92,8 @@ const CategoriesNew = () => {
                   />
                   // </div>
                 );
-              })} */}
-          {/* {seeAll && (
+              })}
+          {seeAll && (
                 <motion.h3
                   layout
                   key={"shopByGenderHeading"}
@@ -118,13 +103,15 @@ const CategoriesNew = () => {
                   }}
                   exit={{ opacity: 0 }}
                   className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
+                  transition={{
+                  }}
                 >
                   Shop by Gender
                 </motion.h3>
-              )} */}
+              )}
 
           {/* category by gender */}
-          {/* {seeAll &&
+          {seeAll &&
                 categoriesByGender.map((category) => {
                   const { name, array, headingClassname } = category;
                   return (
@@ -138,9 +125,9 @@ const CategoriesNew = () => {
                       willExit={true}
                     />
                   );
-                })} */}
-          {/* </AnimatePresence> */}
-          {/* </ul> */}
+                })}
+          </AnimatePresence>
+          </ul>
 
           {/* see-more/less button */}
           <motion.div
@@ -149,7 +136,7 @@ const CategoriesNew = () => {
             initial={false}
             animate={{ y: "auto" }}
             key={"seeAllButton"}
-            className="p-1 w-full flex justify-center overflow-hidden"
+            className="absolute bottom-0 left-0 p-1 w-full flex justify-center overflow-hidden"
           >
             <PrimaryButton
               onClick={() => {
