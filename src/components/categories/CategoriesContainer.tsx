@@ -23,13 +23,12 @@ const CategoriesContainerNew = ({
     <motion.li
       layout
       key={categoryName}
-      initial={willExit ? { opacity: 0, height:0} : false}
+      initial={willExit ? { opacity: 0} : false}
       animate={{
         opacity: 1,
-        height:height
       }}
       // exit={willExit ? { opacity: 1} : { opacity: 1 }}
-      exit={willExit ? { opacity: 0, height:0 }:{ opacity: 1 }}
+      exit={willExit ? { opacity: 0 }:{ opacity: 1 }}
       transition={{
         duration:.3,
       }}

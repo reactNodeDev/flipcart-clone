@@ -59,7 +59,23 @@ const CategoriesNew = () => {
           layout="size"
           layoutRoot
           initial={false}
+          transition={{
+            duration:0.5
+          }}
         >
+          <AnimatePresence>
+            {seeAll && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                exit={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "4rem" }}
+                className="w-full h-[4rem] border-2 border-black"
+                transition={{
+                  delay:0.5
+                }}
+              ></motion.div>
+            )}
+          </AnimatePresence>
           {/* category by name */}
           <motion.h3
             initial={false}
@@ -72,16 +88,16 @@ const CategoriesNew = () => {
               {visibleCategories.map((category, index) => {
                 const { name, array } = category;
                 return (
-                  <div key={name} className="my-3">
-                    <CategoriesContainer
-                      key={name}
-                      categoryName={name}
-                      dataArray={array}
-                      initialAnimation={false}
-                      willExit={index === 0 || index === 1 ? false : true}
-                      layoutDependency={visibleCategories.length}
-                    />
-                  </div>
+                  // <div key={name} className="my-3">
+                  <CategoriesContainer
+                    key={name}
+                    categoryName={name}
+                    dataArray={array}
+                    initialAnimation={false}
+                    willExit={index === 0 || index === 1 ? false : true}
+                    layoutDependency={visibleCategories.length}
+                  />
+                  // </div>
                 );
               })}
               {seeAll && (
@@ -115,10 +131,9 @@ const CategoriesNew = () => {
                     />
                   );
                 })}
-
             </AnimatePresence>
           </ul>
-              {/* see-more/less button */}
+          {/* see-more/less button */}
           <motion.div
             layout="position"
             layoutRoot
