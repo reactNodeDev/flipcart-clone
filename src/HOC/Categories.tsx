@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import { ProductCarousel } from ".";
 import {
-  // AnimatePresence,
+  AnimatePresence,
   MotionConfig,
   motion,
   // useWillChange,
@@ -50,13 +50,13 @@ const Categories = () => {
   //       ];
   // }, [data]);
 
-  // const variants = {
-  //   open: {
-  //     height: "500px",
-  //     opacity: 1,
-  //   },
-  //   collapsed: { height: 0, opacity: 0 },
-  // };
+  const variants = {
+    open: {
+      height: "500px",
+      opacity: 1,
+    },
+    collapsed: { height: 0, opacity: 0 },
+  };
 
   const collapsedCategories = categories.slice(0, 2);
   // const expandedCategories = categories.slice(2, categories.length);
@@ -96,7 +96,7 @@ const Categories = () => {
               );
             })}
 
-            {/* <AnimatePresence initial={false}>
+            <AnimatePresence initial={false}>
               {seeAll && (
                 <motion.div
                   variants={variants}
@@ -108,7 +108,7 @@ const Categories = () => {
                     duration: 0.5,
                   }}
                 >
-                  <div ref={ref} className="p-3">
+                  {/* <div ref={ref} className="p-3">
                     {expandedCategories.map((category) => {
                       const { name, array } = category;
                       return (
@@ -147,10 +147,10 @@ const Categories = () => {
                         />
                       );
                     })}
-                  </div>
+                  </div> */}
                 </motion.div>
               )}
-            </AnimatePresence> */}
+            </AnimatePresence>
 
             {/* see-more/less button */}
           </div>
