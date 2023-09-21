@@ -90,7 +90,7 @@ const CategoriesNew = () => {
                 />
               );
             })}
-            <ul className="w-full">
+            
               <AnimatePresence initial={false}>
                 {seeAll && (
                   <motion.div
@@ -112,12 +112,12 @@ const CategoriesNew = () => {
                             />
                           );
                         })}
-                      <motion.h3
+                      <h3
                         key={"shopByGenderHeading"}
                         className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
                       >
                         Shop by Gender
-                      </motion.h3>
+                      </h3>
                       {categoriesByGender.map((category) => {
                         const { name, array, headingClassname } = category;
                         return (
@@ -135,7 +135,6 @@ const CategoriesNew = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </ul>
 
             {/* see-more/less button */}
           </div>
