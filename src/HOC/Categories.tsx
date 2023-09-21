@@ -6,10 +6,7 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import {
-  AnimatePresence,
-  motion,
-} from "framer-motion";
+import { AnimatePresence, Variants, motion } from "framer-motion";
 
 const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
@@ -29,27 +26,26 @@ const Categories = () => {
   }, [data]);
 
   const categoriesByGender = !data
-      ? []
-      : [
-          {
-            name: "Women",
-            array: [data[8], data[9], data[13], data[14], data[15]],
-            headingClassname: "text-pink-700 text-center",
-          },
-          {
-            name: "Men",
-            array: [data[10], data[11], data[12]],
-            headingClassname: "text-red-700 text-center",
-          },
-        ];
+    ? []
+    : [
+        {
+          name: "Women",
+          array: [data[8], data[9], data[13], data[14], data[15]],
+          headingClassname: "text-pink-700 text-center",
+        },
+        {
+          name: "Men",
+          array: [data[10], data[11], data[12]],
+          headingClassname: "text-red-700 text-center",
+        },
+      ];
 
-  const variants = {
+  const variants: Variants = {
     open: {
-      // height: "auto",
+      height: "auto",
       opacity: 1,
     },
-    // collapsed: { height: 0, opacity: 0 },
-    collapsed: {  opacity: 0 },
+    collapsed: { opacity: 0 },
   };
 
   const collapsedCategories = categories.slice(0, 2);
@@ -64,108 +60,106 @@ const Categories = () => {
 
   return (
     <>
-        <section ref={parentRef} className="relative">
-          <div className={`bg-white overflow-hidden rounded-md px-5`}>
-            {/* category by name */}
-            <h3 className="font-bold text-center text-xl drop-shadow-lg">
-              Shop by Category
-            </h3>
-            {collapsedCategories.slice(0, 2).map((category) => {
-              const { name, array } = category;
-              return (
-                <CategoriesContainer
-                  key={name}
-                  categoryName={name}
-                  dataArray={array}
-                  initialAnimation={false}
-                />
-              );
-            })}
+      <section ref={parentRef} className="relative">
+        <div className={`bg-white overflow-hidden rounded-md px-5`}>
+          {/* category by name */}
+          <h3 className="font-bold text-center text-xl drop-shadow-lg">
+            Shop by Category
+          </h3>
+          {collapsedCategories.slice(0, 2).map((category) => {
+            const { name, array } = category;
+            return (
+              <CategoriesContainer
+                key={name}
+                categoryName={name}
+                dataArray={array}
+                initialAnimation={false}
+              />
+            );
+          })}
 
-            <AnimatePresence initial={false}>
-              {seeAll && (
-                <motion.div
-                  variants={variants}
-                  key={"expandedCategoryContainer"}
-                  initial={"collapsed"}
-                  animate={"open"}
-                  exit={"collapsed"}
-                  transition={{
-                    duration: 0.3,
-                    type:"spring"
-                  }}
-                  style={{
-                    transformOrigin:'top center',
-                    willChange:'contents'
-                  }}
-                >
-                  <div className="p-3">
-                    {expandedCategories.map((category) => {
-                      const { name, array } = category;
-                      return (
-                        <CategoriesContainer
-                          key={name}
-                          categoryName={name}
-                          dataArray={array}
-                          initialAnimation={false}
-                        />
-                      );
-                    })}
-                    <motion.div
-                      variants={{
-                        collapsed: { scale: 0.8 },
-                        open: { scale: 1 },
-                      }}
-                      transition={{ duration: 0.3 }}
+          <AnimatePresence initial={false}>
+            {seeAll && (
+              <motion.div
+                variants={variants}
+                key={"expandedCategoryContainer"}
+                initial={"collapsed"}
+                animate={"open"}
+                exit={"collapsed"}
+                transition={{
+                  duration: 0.3,
+                  type: "spring",
+                }}
+                style={{
+                  transformOrigin: "top center",
+                  willChange: "contents",
+                }}
+              >
+                <div className="">
+                  {expandedCategories.map((category) => {
+                    const { name, array } = category;
+                    return (
+                      <CategoriesContainer
+                        key={name}
+                        categoryName={name}
+                        dataArray={array}
+                        initialAnimation={false}
+                      />
+                    );
+                  })}
+                  <motion.div
+                    variants={{
+                      collapsed: { scale: 0.8 },
+                      open: { scale: 1 },
+                    }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <h3
+                      key={"shopByGenderHeading"}
+                      className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
                     >
-                      <h3
-                        key={"shopByGenderHeading"}
-                        className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                      >
-                        Shop by Gender
-                      </h3>
-                    </motion.div>
-                    {categoriesByGender.map((category) => {
-                      const { name, array, headingClassname } = category;
-                      return (
-                        <CategoriesContainer
-                          key={name}
-                          categoryName={name}
-                          dataArray={array}
-                          headingClassname={
-                            headingClassname ? headingClassname : ""
-                          }
-                        />
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                      Shop by Gender
+                    </h3>
+                  </motion.div>
+                  {categoriesByGender.map((category) => {
+                    const { name, array, headingClassname } = category;
+                    return (
+                      <CategoriesContainer
+                        key={name}
+                        categoryName={name}
+                        dataArray={array}
+                        headingClassname={
+                          headingClassname ? headingClassname : ""
+                        }
+                      />
+                    );
+                  })}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-            {/* see-more/less button */}
-          </div>
-        </section>
-        <motion.div
-          initial={false}
-          key={"seeAllButton"}
-          className={`w-full flex justify-center overflow-hidden`}
-        >
-          <PrimaryButton
-            onClick={() => {
-              setSeeAll((seeAll) => !seeAll);
-              const parentRefCoords = parentRef.current?.offsetTop;
-              if (seeAll && parentRef && parentRefCoords) {
-                window.scrollTo(0, parentRefCoords - 100);
-              }
-            }}
-            text={seeAll ? "See Less" : "See All Categories"}
-            Icon={
-              seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
+          {/* see-more/less button */}
+        </div>
+      </section>
+      <motion.div
+        initial={false}
+        key={"seeAllButton"}
+        className={`w-full flex justify-center overflow-hidden`}
+      >
+        <PrimaryButton
+          onClick={() => {
+            setSeeAll((seeAll) => !seeAll);
+            const parentRefCoords = parentRef.current?.offsetTop;
+            if (seeAll && parentRef && parentRefCoords) {
+              window.scrollTo(0, parentRefCoords - 100);
             }
-          />
-        </motion.div>
-        <ProductCarousel category="laptops" />
+          }}
+          text={seeAll ? "See Less" : "See All Categories"}
+          Icon={seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
+        />
+      </motion.div>
+      <ProductCarousel category="laptops" />
     </>
   );
 };
