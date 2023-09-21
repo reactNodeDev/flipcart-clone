@@ -1,5 +1,4 @@
 import { useState, useMemo, useRef } from "react";
-// import useMeasure from "react-use-measure";
 import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
@@ -11,12 +10,9 @@ import {
   AnimatePresence,
   MotionConfig,
   motion,
-  // useWillChange,
 } from "framer-motion";
 
 const Categories = () => {
-  // const [ref, {height}] = useMeasure()
-  // const [ref] = useMeasure();
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
