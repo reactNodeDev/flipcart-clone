@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef } from "react";
+import useMeasure from "react-use-measure";
 import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
@@ -13,8 +14,9 @@ import {
   // useWillChange,
 } from "framer-motion";
 
-const CategoriesNew = () => {
-  // const willChange = useWillChange();
+const Categories = () => {
+  // const [ref, {height}] = useMeasure()
+  const [ref] = useMeasure();
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -50,16 +52,14 @@ const CategoriesNew = () => {
 
   const variants = {
     open: {
-      height: "auto",
+      height: "500px",
       opacity: 1,
-      transition: { duration: 0.5 },
     },
     collapsed: { height: 0, opacity: 0 },
   };
 
-
-  const collapsedCategories = categories.slice(0, 2)
-  const expandedCategories = categories.slice(2, categories.length)
+  const collapsedCategories = categories.slice(0, 2);
+  const expandedCategories = categories.slice(2, categories.length);
 
   if (!data)
     return (
@@ -71,7 +71,12 @@ const CategoriesNew = () => {
   return (
     <>
       <MotionConfig
-        transition={{ duration: 0.3, type: "tween", ease: "linear", repeatType:'mirror' }}
+        transition={{
+          duration: 0.3,
+          type: "tween",
+          ease: "linear",
+          repeatType: "mirror",
+        }}
       >
         <section ref={parentRef} className="relative">
           <div className={`bg-white overflow-hidden rounded-md px-5`}>
@@ -90,51 +95,62 @@ const CategoriesNew = () => {
                 />
               );
             })}
-            
-              <AnimatePresence initial={false}>
-                {seeAll && (
-                  <motion.div
-                    variants={variants}
-                    key={"expandedCategoryContainer"}
-                    initial={"collapsed"}
-                    animate={"open"}
-                    exit={"collapsed"}
-                  >
-                    <div className="p-3">
-                      {expandedCategories.map((category) => {
-                          const { name, array } = category;
-                          return (
-                            <CategoriesContainer
-                              key={name}
-                              categoryName={name}
-                              dataArray={array}
-                              initialAnimation={false}
-                            />
-                          );
-                        })}
+
+            <AnimatePresence initial={false}>
+              {seeAll && (
+                <motion.div
+                  variants={variants}
+                  key={"expandedCategoryContainer"}
+                  initial={"collapsed"}
+                  animate={"open"}
+                  exit={"collapsed"}
+                  transition={{
+                    duration: 0.5,
+                  }}
+                >
+                  <div ref={ref} className="p-3">
+                    {expandedCategories.map((category) => {
+                      const { name, array } = category;
+                      return (
+                        <CategoriesContainer
+                          key={name}
+                          categoryName={name}
+                          dataArray={array}
+                          initialAnimation={false}
+                        />
+                      );
+                    })}
+                    <motion.div
+                      variants={{
+                        collapsed: { scale: 0.8 },
+                        open: { scale: 1 },
+                      }}
+                      transition={{ duration: 0.5 }}
+                    >
                       <h3
                         key={"shopByGenderHeading"}
                         className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
                       >
                         Shop by Gender
                       </h3>
-                      {categoriesByGender.map((category) => {
-                        const { name, array, headingClassname } = category;
-                        return (
-                          <CategoriesContainer
-                            key={name}
-                            categoryName={name}
-                            dataArray={array}
-                            headingClassname={
-                              headingClassname ? headingClassname : ""
-                            }
-                          />
-                        );
-                      })}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    </motion.div>
+                    {categoriesByGender.map((category) => {
+                      const { name, array, headingClassname } = category;
+                      return (
+                        <CategoriesContainer
+                          key={name}
+                          categoryName={name}
+                          dataArray={array}
+                          headingClassname={
+                            headingClassname ? headingClassname : ""
+                          }
+                        />
+                      );
+                    })}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* see-more/less button */}
           </div>
@@ -164,4 +180,4 @@ const CategoriesNew = () => {
   );
 };
 
-export default CategoriesNew;
+export default Categories;
