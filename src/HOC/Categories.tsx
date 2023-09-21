@@ -61,7 +61,7 @@ const CategoriesNew = () => {
           layoutRoot
           initial={false}
           animate={{
-            height:seeAll ? '130vh' : '40vh'
+            height:seeAll ? 'auto' : '250px'
           }}
           transition={{
             duration: .3,
@@ -132,11 +132,13 @@ const CategoriesNew = () => {
           {/* see-more/less button */}
           <motion.div
             layout="position"
-            layoutRoot
+            // layoutRoot
             initial={false}
-            animate={{ y: "auto" }}
+            animate={{
+              position: seeAll ? 'relative' : 'absolute'
+            }}
             key={"seeAllButton"}
-            className="absolute bottom-0 left-0 p-1 w-full flex justify-center overflow-hidden"
+            className={`${seeAll ? 'relative' : 'absolute'} bottom-0 left-0 p-1 w-full flex justify-center overflow-hidden`}
           >
             <PrimaryButton
               onClick={() => {
