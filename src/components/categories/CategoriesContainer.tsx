@@ -18,7 +18,7 @@ const CategoriesContainerNew = ({
   headingClassname,
   willExit,
 }: ICategoriesContainer) => {
-      const [ref, {height}]  = useMeasure()
+      const [ref]  = useMeasure()
   return (
     <motion.li
       layout
