@@ -9,8 +9,7 @@ import { ProductCarousel } from ".";
 import {
   AnimatePresence,
   // MotionConfig,
-  // motion,
-  m
+  motion,
 } from "framer-motion";
 
 const Categories = () => {
@@ -30,20 +29,20 @@ const Categories = () => {
         ];
   }, [data]);
 
-  const categoriesByGender = !data
-      ? []
-      : [
-          {
-            name: "Women",
-            array: [data[8], data[9], data[13], data[14], data[15]],
-            headingClassname: "text-pink-700 text-center",
-          },
-          {
-            name: "Men",
-            array: [data[10], data[11], data[12]],
-            headingClassname: "text-red-700 text-center",
-          },
-        ];
+  // const categoriesByGender = !data
+  //     ? []
+  //     : [
+  //         {
+  //           name: "Women",
+  //           array: [data[8], data[9], data[13], data[14], data[15]],
+  //           headingClassname: "text-pink-700 text-center",
+  //         },
+  //         {
+  //           name: "Men",
+  //           array: [data[10], data[11], data[12]],
+  //           headingClassname: "text-red-700 text-center",
+  //         },
+  //       ];
 
   const variants = {
     open: {
@@ -85,7 +84,7 @@ const Categories = () => {
 
             <AnimatePresence initial={false}>
               {seeAll && (
-                <m.div
+                <motion.div
                   variants={variants}
                   key={"expandedCategoryContainer"}
                   initial={"collapsed"}
@@ -111,7 +110,7 @@ const Categories = () => {
                         />
                       );
                     })}
-                    <m.div
+                    {/* <motion.div
                       variants={{
                         collapsed: { scale: 0.8 },
                         open: { scale: 1 },
@@ -124,7 +123,7 @@ const Categories = () => {
                       >
                         Shop by Gender
                       </h3>
-                    </m.div>
+                    </motion.div>
                     {categoriesByGender.map((category) => {
                       const { name, array, headingClassname } = category;
                       return (
@@ -137,16 +136,16 @@ const Categories = () => {
                           }
                         />
                       );
-                    })}
+                    })} */}
                   </div>
-                </m.div>
+                </motion.div>
               )}
             </AnimatePresence>
 
             {/* see-more/less button */}
           </div>
         </section>
-        <m.div
+        <motion.div
           initial={false}
           key={"seeAllButton"}
           className={`w-full flex justify-center overflow-hidden`}
@@ -164,7 +163,7 @@ const Categories = () => {
               seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
             }
           />
-        </m.div>
+        </motion.div>
         <ProductCarousel category="laptops" />
     </>
   );

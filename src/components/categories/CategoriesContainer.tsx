@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 
 interface ICategoriesContainer {
   dataArray: string[];
@@ -17,7 +17,7 @@ const CategoriesContainerNew = ({
   headingClassname,
 }: ICategoriesContainer) => {
   return (
-    <m.div
+    <motion.div
       variants={{ collapsed: { scale: 0.95 }, open: { scale: 1 } }}
       transition={{ duration: 0.3 }}
     >
@@ -33,7 +33,7 @@ const CategoriesContainerNew = ({
           })}
         </div>
       </div>
-    </m.div>
+    </motion.div>
   );
 };
 
