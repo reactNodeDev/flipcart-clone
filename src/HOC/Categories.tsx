@@ -78,7 +78,7 @@ const CategoriesNew = () => {
           </motion.h3>
           <ul className="w-full gap-y-2">
           <AnimatePresence initial={false} mode="popLayout">
-          {visibleCategories.map((category, index) => {
+          {categories.map((category, index) => {
                 const { name, array } = category;
                 return (
                   // <div key={name} className="my-3">
@@ -88,12 +88,11 @@ const CategoriesNew = () => {
                     dataArray={array}
                     initialAnimation={false}
                     willExit={index === 0 || index === 1 ? false : true}
-                    layoutDependency={visibleCategories.length}
                   />
                   // </div>
                 );
               })}
-          {seeAll && (
+          {/* {seeAll && (
                 <motion.h3
                   layout
                   key={"shopByGenderHeading"}
@@ -108,11 +107,38 @@ const CategoriesNew = () => {
                 >
                   Shop by Gender
                 </motion.h3>
-              )}
-
+              )} */}
+           <motion.h3
+                  layout
+                  key={"shopByGenderHeading"}
+                  initial={{ opacity: 0 }}
+                  animate={{
+                    opacity: 1,
+                  }}
+                  exit={{ opacity: 0 }}
+                  className="font-bold text-center text-xl drop-shadow-lg mt-8 overflow-hidden"
+                  transition={{
+                  }}
+                >
+                  Shop by Gender
+                </motion.h3>
           {/* category by gender */}
-          {seeAll &&
+          {/* {seeAll &&
                 categoriesByGender.map((category) => {
+                  const { name, array, headingClassname } = category;
+                  return (
+                    <CategoriesContainer
+                      key={name}
+                      categoryName={name}
+                      dataArray={array}
+                      headingClassname={
+                        headingClassname ? headingClassname : ""
+                      }
+                      willExit={true}
+                    />
+                  );
+                })} */}
+                {categoriesByGender.map((category) => {
                   const { name, array, headingClassname } = category;
                   return (
                     <CategoriesContainer
