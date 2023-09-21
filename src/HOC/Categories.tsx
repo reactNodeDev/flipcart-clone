@@ -62,8 +62,12 @@ const CategoriesNew = () => {
           layout="size"
           layoutRoot
           initial={false}
+          animate={{
+            height:seeAll ? '100vh' : '30vh'
+          }}
           transition={{
             duration: 0.3,
+
           }}
           style={{ willChange }}
         >
