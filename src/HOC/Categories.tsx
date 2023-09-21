@@ -92,7 +92,7 @@ const Categories = () => {
                   exit={"collapsed"}
                   transition={{
                     duration: 0.3,
-                    type:'just'
+                    type:"spring"
                   }}
                   style={{
                     transformOrigin:'top center',
