@@ -50,7 +50,7 @@ const Categories = () => {
         duration: 0.3,
         type:'tween',
         ease: [0.12, 1, 0.39, 1],
-        delayChildren: .1,
+        delayChildren: .2,
       },
     },
     exit: {
@@ -102,7 +102,7 @@ const Categories = () => {
                 initial={"initial"}
                 animate={"animate"}
                 exit={"exit"}
-                className="categoriesParent origin-top w-full h-auto"
+                className="categoriesParent origin-top w-full min-h-0 h-auto"
               >
                 {expandedCategories.map((category) => {
                   const { name, array } = category;
