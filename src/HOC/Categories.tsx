@@ -43,21 +43,25 @@ const Categories = () => {
   const dropdownMainParentVariants: Variants = {
     initial: {
       scaleY: 0,
-      // transition: {
-      //   delayChildren: 2,
-      //   staggerChildren: 0.2,
-      // },
     },
     animate: {
       scaleY: 1,
       transition: {
-        duration: 0.5,
-        type: "tween",
+        duration: 0.3,
+        type:'just',
         ease: [0.12, 1, 0.39, 1],
-        delayChildren: 0.2,
+        delayChildren: .1,
       },
     },
-    exit: { scaleY: 0, transition: { duration: 0.5 } },
+    exit: {
+      scaleY: 0,
+      height:0,
+      transition: {
+        duration: .5,
+        ease: [0.22, 1, 0.36, 1],
+        delay:0.2
+      },
+    },
   };
 
   const collapsedCategories = categories.slice(0, 2);
@@ -92,51 +96,51 @@ const Categories = () => {
 
           <AnimatePresence initial={false}>
             {seeAll && (
-                <motion.div
+              <motion.div
                 key={"expandedCategoryContainer"}
                 variants={dropdownMainParentVariants}
-                  initial={"initial"}
-                  animate={"animate"}
-                  exit={"exit"}
-                  className="categoriesParent origin-top"
+                initial={"initial"}
+                animate={"animate"}
+                exit={"exit"}
+                className="categoriesParent origin-top w-full h-auto"
+              >
+                {expandedCategories.map((category) => {
+                  const { name, array } = category;
+                  return (
+                    <CategoriesContainer
+                      key={name}
+                      categoryName={name}
+                      dataArray={array}
+                      initialAnimation={false}
+                    />
+                  );
+                })}
+                <motion.h3
+                  key={"shopByGenderHeading"}
+                  className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
+                  variants={{
+                    initial:{scaleY:0},
+                    animate:{scaleY:1},
+                    exit:{scaleY:0},
+                  }}
                 >
-                  <motion.div initial={{scaleY:0}} animate={{scaleY:1}} exit={{scaleY:0}} className="w-full h-[5rem] bg-fuchsia-600 origin-top"></motion.div>
-                  {expandedCategories.map((category) => {
-                    const { name, array } = category;
-                    return (
-                      <CategoriesContainer
-                        key={name}
-                        categoryName={name}
-                        dataArray={array}
-                        initialAnimation={false}
-                      />
-                    );
-                  })}
-                  <motion.h3
-                    variants={{
-                      initial: { scaleY: 0.95 },
-                      animate: { scaleY: 1 },
-                    }}
-                    key={"shopByGenderHeading"}
-                    className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                  >
-                    Shop by Gender
-                  </motion.h3>
+                  Shop by Gender
+                </motion.h3>
 
-                  {categoriesByGender.map((category) => {
-                    const { name, array, headingClassname } = category;
-                    return (
-                      <CategoriesContainer
-                        key={name}
-                        categoryName={name}
-                        dataArray={array}
-                        headingClassname={
-                          headingClassname ? headingClassname : ""
-                        }
-                      />
-                    );
-                  })}
-                </motion.div>
+                {categoriesByGender.map((category) => {
+                  const { name, array, headingClassname } = category;
+                  return (
+                    <CategoriesContainer
+                      key={name}
+                      categoryName={name}
+                      dataArray={array}
+                      headingClassname={
+                        headingClassname ? headingClassname : ""
+                      }
+                    />
+                  );
+                })}
+              </motion.div>
             )}
           </AnimatePresence>
 

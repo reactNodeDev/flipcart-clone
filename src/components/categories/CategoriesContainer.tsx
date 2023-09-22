@@ -19,43 +19,38 @@ const CategoriesContainerNew = ({
 
   const menuContainerParentVariants: Variants = {
     initial: {
-      transition: {
-        delay:1,
-        delayChildren:2,
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-      },
+      opacity: 0,
     },
     animate: {
+      opacity: 1,
       transition: {
-        delay:1,
-        delayChildren: 2,
-        staggerChildren: 0.09,
-        staggerDirection: 1,
+        duration: 0.3,
+        delayChildren: 0.1,
+      },
+    },
+    exit: {
+      opacity: 0,
+      transition: {
+        duration: 0.2,
       },
     },
   };
 
   return (
-    <motion.div
-      variants={menuContainerParentVariants}
-      initial='initial'
-      animate='animate'
-      exit={'initial'}
-      className="origin-bottom"
-    >
-      <div className="my-2">
-        <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
-          {categoryName}
-        </h3>
-        <div className="grid grid-cols-12 items-center gap-3">
-          {dataArray?.map((category: string) => {
-            return (
-              <CategoryButton key={category} name={category?.toUpperCase()} />
-            );
-          })}
-        </div>
-      </div>
+    <motion.div variants={menuContainerParentVariants} className="my-2">
+      <motion.h3 variants={menuContainerParentVariants} className={`${headingClassname} mb-2 font-semibold text-xl`}>
+        {categoryName}
+      </motion.h3>
+      <motion.div
+        variants={menuContainerParentVariants}
+        className="grid grid-cols-12 items-center gap-3"
+      >
+        {dataArray?.map((category: string) => {
+          return (
+            <CategoryButton key={category} name={category?.toUpperCase()} />
+          );
+        })}
+      </motion.div>
     </motion.div>
   );
 };
