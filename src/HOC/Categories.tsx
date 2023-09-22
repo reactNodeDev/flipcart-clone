@@ -48,7 +48,7 @@ const Categories = () => {
       scaleY: 1,
       transition: {
         duration: 0.3,
-        type:'just',
+        type:'tween',
         ease: [0.12, 1, 0.39, 1],
         delayChildren: .1,
       },
