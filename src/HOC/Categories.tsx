@@ -50,7 +50,7 @@ const Categories = () => {
         duration: 0.3,
         type:'tween',
         ease: [0.12, 1, 0.39, 1],
-        delayChildren: .2,
+        delayChildren: .15,
       },
     },
     exit: {
@@ -59,7 +59,7 @@ const Categories = () => {
       transition: {
         duration: .5,
         ease: [0.22, 1, 0.36, 1],
-        delay:0.2
+        delay:0.3
       },
     },
   };

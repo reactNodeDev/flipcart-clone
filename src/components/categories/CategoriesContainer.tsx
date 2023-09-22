@@ -37,7 +37,7 @@ const CategoriesContainerNew = ({
   };
 
   return (
-    <motion.div variants={menuContainerParentVariants} className="my-2">
+    <motion.div variants={menuContainerParentVariants} className="my-2 origin-top">
       <motion.h3 variants={menuContainerParentVariants} className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
       </motion.h3>
