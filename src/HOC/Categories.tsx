@@ -40,12 +40,24 @@ const Categories = () => {
         },
       ];
 
-  const variants: Variants = {
-    open: {
-      height: "auto",
-      opacity: 1,
+  const dropdownMainParentVariants: Variants = {
+    initial: {
+      scaleY: 0,
+      // transition: {
+      //   delayChildren: 2,
+      //   staggerChildren: 0.2,
+      // },
     },
-    collapsed: { opacity: 0 },
+    animate: {
+      scaleY: 1,
+      transition: {
+        duration: 0.5,
+        type: "tween",
+        ease: [0.12, 1, 0.39, 1],
+        delayChildren: 0.2,
+      },
+    },
+    exit: { scaleY: 0, transition: { duration: 0.5 } },
   };
 
   const collapsedCategories = categories.slice(0, 2);
@@ -80,22 +92,15 @@ const Categories = () => {
 
           <AnimatePresence initial={false}>
             {seeAll && (
-              <motion.div
-                variants={variants}
+                <motion.div
                 key={"expandedCategoryContainer"}
-                initial={"collapsed"}
-                animate={"open"}
-                exit={"collapsed"}
-                transition={{
-                  duration: 0.3,
-                  type: "spring",
-                }}
-                style={{
-                  transformOrigin: "top center",
-                  willChange: "contents",
-                }}
-              >
-                <div className="">
+                variants={dropdownMainParentVariants}
+                  initial={"initial"}
+                  animate={"animate"}
+                  exit={"exit"}
+                  className="categoriesParent origin-top"
+                >
+                  <motion.div initial={{scaleY:0}} animate={{scaleY:1}} exit={{scaleY:0}} className="w-full h-[5rem] bg-fuchsia-600 origin-top"></motion.div>
                   {expandedCategories.map((category) => {
                     const { name, array } = category;
                     return (
@@ -107,20 +112,17 @@ const Categories = () => {
                       />
                     );
                   })}
-                  <motion.div
+                  <motion.h3
                     variants={{
-                      collapsed: { scale: 0.8 },
-                      open: { scale: 1 },
+                      initial: { scaleY: 0.95 },
+                      animate: { scaleY: 1 },
                     }}
-                    transition={{ duration: 0.3 }}
+                    key={"shopByGenderHeading"}
+                    className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
                   >
-                    <h3
-                      key={"shopByGenderHeading"}
-                      className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                    >
-                      Shop by Gender
-                    </h3>
-                  </motion.div>
+                    Shop by Gender
+                  </motion.h3>
+
                   {categoriesByGender.map((category) => {
                     const { name, array, headingClassname } = category;
                     return (
@@ -134,8 +136,7 @@ const Categories = () => {
                       />
                     );
                   })}
-                </div>
-              </motion.div>
+                </motion.div>
             )}
           </AnimatePresence>
 

@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
-import { motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 
 interface ICategoriesContainer {
   dataArray: string[];
@@ -16,10 +16,33 @@ const CategoriesContainerNew = ({
   categoryName,
   headingClassname,
 }: ICategoriesContainer) => {
+
+  const menuContainerParentVariants: Variants = {
+    initial: {
+      transition: {
+        delay:1,
+        delayChildren:2,
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+      },
+    },
+    animate: {
+      transition: {
+        delay:1,
+        delayChildren: 2,
+        staggerChildren: 0.09,
+        staggerDirection: 1,
+      },
+    },
+  };
+
   return (
     <motion.div
-      variants={{ collapsed: { scale: 0.95 }, open: { scale: 1 } }}
-      transition={{ duration: 0.3 }}
+      variants={menuContainerParentVariants}
+      initial='initial'
+      animate='animate'
+      exit={'initial'}
+      className="origin-bottom"
     >
       <div className="my-2">
         <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
