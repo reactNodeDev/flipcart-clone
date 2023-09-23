@@ -20,10 +20,10 @@ const CategoriesContainerNew = ({
   const menuContainerParentVariants: Variants = {
     initial: {
       opacity: 0,
-      scaleY:0
+      // scaleY:0
     },
     animate: {
-      scaleY:1,
+      // scaleY:1,
       opacity: 1,
       transition: {
         duration: 0.3,
@@ -31,16 +31,19 @@ const CategoriesContainerNew = ({
       },
     },
     exit: {
-      scaleY:0,
+      // scaleY:0,
       opacity: 0,
       transition: {
-        duration: 0.2,
+        duration: .4,
       },
     },
   };
 
   return (
-    <motion.div variants={menuContainerParentVariants} initial='initial' animate='animate' exit='exit' className="my-2 origin-top">
+    <motion.div variants={menuContainerParentVariants} 
+    initial='initial' animate='animate' 
+    exit='exit'
+     className="my-2 origin-top">
       <motion.h3 variants={menuContainerParentVariants} className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
       </motion.h3>
