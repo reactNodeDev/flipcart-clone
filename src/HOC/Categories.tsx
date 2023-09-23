@@ -47,18 +47,11 @@ const Categories = () => {
   const dropdownMainParentVariants: Variants = {
     initial: {
       height: 0,
-      transition: {
-        duration: 1,
-        type: "spring",
-        ease: [0.12, 1, 0.39, 1],
-        delayChildren: 0.15,
-      },
     },
     animate: {
       height: 'auto',
       transition: {
-        duration: 0.5,
-        type: "spring",
+        duration: 0.3,
         ease: [0.12, 1, 0.39, 1],
         delayChildren: 0.15,
       },
@@ -66,8 +59,8 @@ const Categories = () => {
     leave: {
       height: 0,
       transition: {
-        // duration: 0.5,
-        duration: 2,
+        duration: 0.5,
+        // duration: 2,
         ease: [0.22, 1, 0.36, 1],
         delay: 0.3,
       },
