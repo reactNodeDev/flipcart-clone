@@ -6,9 +6,10 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import { AnimatePresence, motion, useWillChange, Variants } from "framer-motion";
 
 const Categories = () => {
+  const willChange = useWillChange()
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -156,6 +157,7 @@ const Categories = () => {
             animate="animate"
             exit="leave"
             className={`origin-top w-full max-h-[130vh]`}
+            style={{willChange}}
           >
             {/* <div className="flex h-full flex-col"> */}
               {expandedCategories}
