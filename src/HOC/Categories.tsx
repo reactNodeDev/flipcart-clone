@@ -50,7 +50,7 @@ const Categories = () => {
       transition: {
         duration: 1,
         type: "spring",
-        ease: "linear", // changed frm [0.12, 1, 0.39, 1]
+        ease: [0.12, 1, 0.39, 1],
         delayChildren: 0.15,
       },
     },
@@ -59,7 +59,7 @@ const Categories = () => {
       transition: {
         duration: 0.5,
         type: "spring",
-        ease: "linear", // changed frm [0.12, 1, 0.39, 1]
+        ease: [0.12, 1, 0.39, 1],
         delayChildren: 0.15,
       },
     },
