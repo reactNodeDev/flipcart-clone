@@ -1,9 +1,5 @@
 import { useState, useMemo, useRef } from "react";
-import {
-  CategoriesContainer,
-  Loader,
-  PrimaryButton,
-} from "../components";
+import { CategoriesContainer, Loader, PrimaryButton } from "../components";
 import { useFetch } from "../hooks";
 import {
   MdOutlineKeyboardArrowDown,
@@ -49,7 +45,7 @@ const Categories = () => {
       height: 0,
     },
     animate: {
-      height: 'auto',
+      height: "auto",
       transition: {
         duration: 0.3,
         ease: [0.12, 1, 0.39, 1],
@@ -68,7 +64,35 @@ const Categories = () => {
   };
 
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = categories.slice(2, categories.length);
+  const expandedCategories = categories
+    .slice(2, categories.length)
+    .map((category) => {
+      const { name, array } = category;
+      return (
+        <div className="overflow-hidden">
+          <CategoriesContainer
+            key={name}
+            categoryName={name}
+            dataArray={array}
+            initialAnimation={false}
+          />
+        </div>
+      );
+    });
+
+  const genderCategories = categoriesByGender.map((category) => {
+    const { name, array, headingClassname } = category;
+    return (
+      <div className="overflow-hidden">
+        <CategoriesContainer
+          key={name}
+          categoryName={name}
+          dataArray={array}
+          headingClassname={headingClassname ? headingClassname : ""}
+        />
+      </div>
+    );
+  });
 
   if (!data)
     return (
@@ -191,83 +215,55 @@ const Categories = () => {
         </motion.div> */}
       </section>
       <AnimatePresence>
-      {seeAll && (
-                <motion.div
-                  // layout='position'
-                  key={"expandedCategoryContainer"}
-                  variants={dropdownMainParentVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="leave"
-                  className={` h-full origin-top w-full`}
-                >
-                  <div className="flex h-full flex-col">
-                    {expandedCategories.map((category) => {
-                      const { name, array } = category;
-                      return (
-                        <div className="overflow-hidden">
-                          <CategoriesContainer
-                            key={name}
-                            categoryName={name}
-                            dataArray={array}
-                            initialAnimation={false}
-                          />
-                        </div>
-                      );
-                    })}
-                    <motion.h3
-                      key={"shopByGenderHeading"}
-                      className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                      variants={{
-                        initial: { opacity: 0 },
-                        animate: { opacity: 1 },
-                        exit: { opacity: 0 },
-                      }}
-                      exit="exit"
-                    >
-                      Shop by Gender
-                    </motion.h3>
-
-                    {categoriesByGender.map((category) => {
-                      const { name, array, headingClassname } = category;
-                      return (
-                        <div className="overflow-hidden">
-                          <CategoriesContainer
-                            key={name}
-                            categoryName={name}
-                            dataArray={array}
-                            headingClassname={
-                              headingClassname ? headingClassname : ""
-                            }
-                          />
-                        </div>
-                      );
-                    })}
-                  </div>
-                </motion.div>
-              )}
-              </AnimatePresence>
-
-              <motion.div
-              // initial={false}
-              layout="position"
-              key={"seeAllButton"}
-              className={`flex justify-center overflow-hidden `}
-            >
-              <PrimaryButton
-                onClick={() => {
-                  setSeeAll((seeAll) => !seeAll);
-                  const parentRefCoords = parentRef.current?.offsetTop;
-                  if (seeAll && parentRef && parentRefCoords) {
-                    window.scrollTo(0, parentRefCoords - 100);
-                  }
+        {seeAll && (
+          <motion.div
+            // layout='position'
+            key={"expandedCategoryContainer"}
+            variants={dropdownMainParentVariants}
+            initial="initial"
+            animate="animate"
+            exit="leave"
+            className={` h-full origin-top w-full`}
+          >
+            <div className="flex h-full flex-col">
+              {expandedCategories}
+              <motion.h3
+                key={"shopByGenderHeading"}
+                className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
+                variants={{
+                  initial: { opacity: 0 },
+                  animate: { opacity: 1 },
+                  exit: { opacity: 0 },
                 }}
-                text={seeAll ? "See Less" : "See All Categories"}
-                Icon={
-                  seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
-                }
-              />
-            </motion.div>
+                exit="exit"
+              >
+                Shop by Gender
+              </motion.h3>
+
+              {genderCategories}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        // initial={false}
+        layout="position"
+        key={"seeAllButton"}
+        className={`flex justify-center overflow-hidden `}
+      >
+        <PrimaryButton
+          onClick={() => {
+            setSeeAll((seeAll) => !seeAll);
+            const parentRefCoords = parentRef.current?.offsetTop;
+            if (seeAll && parentRef && parentRefCoords) {
+              window.scrollTo(0, parentRefCoords - 100);
+            }
+          }}
+          text={seeAll ? "See Less" : "See All Categories"}
+          Icon={seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
+        />
+      </motion.div>
       <ProductCarousel category="laptops" />
     </>
   );
