@@ -15,15 +15,14 @@ const CategoriesContainerNew = ({
   dataArray,
   categoryName,
   headingClassname,
+  willExit=true
 }: ICategoriesContainer) => {
 
-  const menuContainerParentVariants: Variants = {
+  const menuContainerParentVariants: Variants = willExit ? {
     initial: {
       opacity: 0,
-      // scaleY:0
     },
     animate: {
-      // scaleY:1,
       opacity: 1,
       transition: {
         duration: 0.3,
@@ -31,13 +30,12 @@ const CategoriesContainerNew = ({
       },
     },
     exit: {
-      // scaleY:0,
       opacity: 0,
       transition: {
         duration: .4,
       },
     },
-  };
+  }: {}
 
   return (
     <motion.div variants={menuContainerParentVariants} 

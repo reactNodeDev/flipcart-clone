@@ -58,7 +58,7 @@ const Categories = () => {
       transition: {
         duration: 0.3,
         ease: [0.22, 1, 0.36, 1],
-        delay: .3,
+        delay: .4,
       },
     },
   };
@@ -82,6 +82,7 @@ const Categories = () => {
             categoryName={name}
             dataArray={array}
             initialAnimation={false}
+            willExit
           />
         </div>
       );
@@ -96,6 +97,7 @@ const Categories = () => {
           categoryName={name}
           dataArray={array}
           headingClassname={headingClassname ? headingClassname : ""}
+          willExit
         />
       </div>
     );
@@ -140,6 +142,7 @@ const Categories = () => {
                 categoryName={name}
                 dataArray={array}
                 initialAnimation={false}
+                willExit={false}
               />
             );
           })}
@@ -149,12 +152,12 @@ const Categories = () => {
           <motion.div
             key={"expandedCategoryContainer"}
             variants={dropdownMainParentVariants}
-            initial="initial"
+            initial={false}
             animate="animate"
             exit="leave"
             className={`origin-top w-full max-h-[130vh]`}
           >
-            <div className="flex h-full flex-col">
+            {/* <div className="flex h-full flex-col"> */}
               {expandedCategories}
               <motion.h3
                 key={"shopByGenderHeading"}
@@ -178,7 +181,7 @@ const Categories = () => {
               >
                 <SeeAllButton />
               </motion.div>
-            </div>
+            {/* </div> */}
           </motion.div>
         )}
 
@@ -188,7 +191,7 @@ const Categories = () => {
             key={"seeAllButton"}
             className={`flex justify-center overflow-hidden `}
             variants={buttonVariants}
-            initial="initial"
+            initial={false}
             animate="animate"
             // exit="animate"
           >
