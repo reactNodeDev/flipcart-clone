@@ -55,7 +55,7 @@ const Categories = () => {
     },
     leave: {
       scaleY: 0,
-      height:0,
+      // height:0,
       transition: {
         duration: 0.3,
         ease: [0.22, 1, 0.36, 1],
@@ -156,7 +156,7 @@ const Categories = () => {
             initial='initial'
             animate="animate"
             exit="leave"
-            className={`origin-top w-full max-h-[130vh]`}
+            className={`origin-top w-full h-[130vh]`}
             style={{willChange}}
           >
             {/* <div className="flex h-full flex-col"> */}
@@ -189,7 +189,6 @@ const Categories = () => {
 
         {!seeAll && (
           <motion.div
-            layout="position"
             key={"seeAllButton"}
             className={`flex justify-center overflow-hidden `}
             variants={buttonVariants}
