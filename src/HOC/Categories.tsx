@@ -48,7 +48,7 @@ const Categories = () => {
     animate: {
       scaleY: 1,
       transition: {
-        duration: 0.3,
+        duration: .3,
         ease: [0.12, 1, 0.39, 1],
         delayChildren: 0.15,
       },
@@ -153,7 +153,7 @@ const Categories = () => {
           <motion.div
             key={"expandedCategoryContainer"}
             variants={dropdownMainParentVariants}
-            initial={false}
+            initial='initial'
             animate="animate"
             exit="leave"
             className={`origin-top w-full max-h-[130vh]`}
