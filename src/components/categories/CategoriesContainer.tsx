@@ -15,49 +15,46 @@ const CategoriesContainerNew = ({
   dataArray,
   categoryName,
   headingClassname,
-  willExit=true
+  willExit = true,
 }: ICategoriesContainer) => {
-
-  const menuContainerParentVariants: Variants = willExit ? {
-    initial: {
-      scaleY:0,
-      opacity: 0,
-    },
-    animate: {
-      scaleY:1,
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-        delayChildren: 0.1,
-      },
-    },
-    exit: {
-      scaleY:0,
-      opacity: 0,
-      transition: {
-        duration: .4,
-      },
-    },
-  }: {}
+  const menuContainerParentVariants: Variants = willExit
+    ? {
+        initial: {
+          opacity: 0,
+        },
+        animate: {
+          opacity: 1,
+          transition: {
+            duration: 0.3,
+          },
+        },
+        exit: {
+          opacity: 0,
+          transition: {
+            duration: 0.3,
+          },
+        },
+      }
+    : {};
 
   return (
-    <motion.div variants={menuContainerParentVariants} 
-    initial='initial' animate='animate' 
-    exit='exit'
-     className="my-2 origin-top overflow-hidden">
-      <motion.h3 variants={menuContainerParentVariants} className={`${headingClassname} mb-2 font-semibold text-xl`}>
+    <motion.div
+      variants={menuContainerParentVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      className="my-2 origin-top overflow-hidden"
+    >
+      <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
-      </motion.h3>
-      <motion.div
-        variants={menuContainerParentVariants}
-        className="grid grid-cols-12 items-center gap-3"
-      >
+      </h3>
+      <div className="grid grid-cols-12 items-center gap-3">
         {dataArray?.map((category: string) => {
           return (
             <CategoryButton key={category} name={category?.toUpperCase()} />
           );
         })}
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
