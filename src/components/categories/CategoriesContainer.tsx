@@ -44,7 +44,7 @@ const CategoriesContainerNew = ({
     <motion.div variants={menuContainerParentVariants} 
     initial='initial' animate='animate' 
     exit='exit'
-     className="my-2 origin-top ">
+     className="my-2 origin-top overflow-hidden">
       <motion.h3 variants={menuContainerParentVariants} className={`${headingClassname} mb-2 font-semibold text-xl`}>
         {categoryName}
       </motion.h3>

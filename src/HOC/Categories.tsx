@@ -6,19 +6,13 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import {
-  AnimatePresence,
-  motion,
-  useWillChange,
-  Variants,
-} from "framer-motion";
+import { AnimatePresence, motion, Variants } from "framer-motion";
 
 const Categories = () => {
-  const willChange = useWillChange();
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  // const windowWidth = window.innerWidth;
+
   const categories = useMemo(() => {
     return !data
       ? []
@@ -48,27 +42,24 @@ const Categories = () => {
 
   const dropdownMainParentVariants: Variants = {
     initial: {
-      // scaleY: 0,
-      height:0,
+      gridTemplateRows: "0fr",
     },
     animate: {
-      // scaleY: 1,
-      height:'auto',
+      gridTemplateRows: "1fr",
       transition: {
-        duration: 0.9,
+        duration: 0.4,
         ease: [0.12, 1, 0.39, 1],
         delayChildren: 0.15,
-        bounce:0
+        bounce: 0,
       },
     },
     leave: {
-      // scaleY: 0,
-      height:0,
+      gridTemplateRows: "0fr",
       transition: {
-        duration: 0.9,
+        duration: 0.3,
         ease: [0.22, 1, 0.36, 1],
         delay: 0.3,
-        bounce:0
+        bounce: 0,
       },
     },
   };
@@ -78,45 +69,34 @@ const Categories = () => {
     animate: { opacity: 1, transition: { duration: 0.4 } },
   };
 
-  // const seeMoreButtonVariants: Variants = {
-  //   initial: {},
-  //   animate: { y: seeAll ? 500 : -500, transition: { duration: 0.4 } },
-  // };
-
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = seeAll
-    ? categories.slice(2, categories.length).map((category) => {
-        const { name, array } = category;
-        return (
-          <CategoriesContainer
-            key={name}
-            categoryName={name}
-            dataArray={array}
-            initialAnimation={false}
-            willExit
-          />
-          // <div className="overflow-hidden">
-          // </div>
-        );
-      })
-    : null;
+  const expandedCategories = categories.slice(2, categories.length).map((category) => {
+    const { name, array } = category;
+    return (
+      <CategoriesContainer
+        key={name}
+        categoryName={name}
+        dataArray={array}
+        initialAnimation={false}
+        willExit
+      />
+    );
+  })
 
-  const genderCategories = seeAll
-    ? categoriesByGender.map((category) => {
-        const { name, array, headingClassname } = category;
-        return (
-          <div className="overflow-hidden">
-            <CategoriesContainer
-              key={name}
-              categoryName={name}
-              dataArray={array}
-              headingClassname={headingClassname ? headingClassname : ""}
-              willExit
-            />
-          </div>
-        );
-      })
-    : null;
+  const genderCategories = categoriesByGender.map((category) => {
+    const { name, array, headingClassname } = category;
+    return (
+      <div className="overflow-hidden">
+        <CategoriesContainer
+          key={name}
+          categoryName={name}
+          dataArray={array}
+          headingClassname={headingClassname ? headingClassname : ""}
+          willExit
+        />
+      </div>
+    );
+  })
 
   const SeeAllButton = () => {
     return (
@@ -143,7 +123,7 @@ const Categories = () => {
 
   return (
     <>
-      <div className="mx-4 my-2 bg-white border-2 border-black">
+      <div className="mx-4 my-2 bg-white ">
         <section ref={parentRef} className="relative ">
           <div className={` overflow-hidden rounded-md px-5`}>
             {/* category by name */}
@@ -163,59 +143,49 @@ const Categories = () => {
               );
             })}
 
-            {/* ${windowWidth > 1024 ? "h-[90vh]" : "h-[130vh]"}  */}
-            <motion.div
-              layout
-              layoutRoot
-              className="flex flex-col justify-center"
-            >
-              <motion.div key="expandableCategories" layout>
-                <AnimatePresence>
-                  {seeAll && (
-                    <motion.div
-                      key={"expandedCategoryContainer"}
-                      variants={dropdownMainParentVariants}
+            <AnimatePresence>
+              {seeAll && (
+                <motion.div
+                  key={"expandedCategoryContainer"}
+                  variants={dropdownMainParentVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="leave"
+                  className={`grid origin-top`}
+                >
+                  <motion.div className="overflow-hidden">
+                    {expandedCategories}
+                    <motion.h3
+                      key={"shopByGenderHeading"}
+                      className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
+                      variants={buttonVariants}
                       initial="initial"
                       animate="animate"
-                      exit="leave"
-                      className={`h-full origin-top w-full border-2 border-cyan-950 
-                    overflow-y-clip`}
-                      style={{ willChange }}
+                      exit="initial"
                     >
-                      {/* <div className="h-full flex flex-col bg-purple-500"> */}
-                      {expandedCategories}
-                      <motion.h3
-                        key={"shopByGenderHeading"}
-                        className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                        variants={buttonVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="initial"
-                      >
-                        Shop by Gender
-                      </motion.h3>
+                      Shop by Gender
+                    </motion.h3>
 
-                      {genderCategories}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                    {genderCategories}
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
-              <motion.div
-                layout
-                key={"seeAllButton"}
-                className={`flex justify-center overflow-hidden `}
-                variants={buttonVariants}
-                animate="animate"
-                initial="initial"
-                exit="initial"
-              >
-                <SeeAllButton />
-              </motion.div>
+            <motion.div
+              key={"seeAllButton"}
+              className={`flex justify-center overflow-hidden `}
+              variants={buttonVariants}
+              animate="animate"
+              initial="initial"
+              exit="initial"
+            >
+              <SeeAllButton />
             </motion.div>
           </div>
         </section>
       </div>
+
       <ProductCarousel category="laptops" />
     </>
   );
