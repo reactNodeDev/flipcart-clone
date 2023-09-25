@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { CategoryButton } from "..";
-import { Variants, motion } from "framer-motion";
+// import {Variants,motion } from "framer-motion";
 
 interface ICategoriesContainer {
   dataArray: string[];
@@ -15,34 +15,34 @@ const CategoriesContainerNew = ({
   dataArray,
   categoryName,
   headingClassname,
-  willExit = true,
+  // willExit = true,
 }: ICategoriesContainer) => {
-  const menuContainerParentVariants: Variants = willExit
-    ? {
-        initial: {
-          opacity: 0,
-        },
-        animate: {
-          opacity: 1,
-          transition: {
-            duration: 0.3,
-          },
-        },
-        exit: {
-          opacity: 0,
-          transition: {
-            duration: 0.3,
-          },
-        },
-      }
-    : {};
+  // const menuContainerParentVariants: Variants = willExit
+  //   ? {
+  //       initial: {
+  //         opacity: 0,
+  //       },
+  //       animate: {
+  //         opacity: 1,
+  //         transition: {
+  //           duration: 0.3,
+  //         },
+  //       },
+  //       exit: {
+  //         opacity: 0,
+  //         transition: {
+  //           duration: 0.3,
+  //         },
+  //       },
+  //     }
+  //   : {};
 
   return (
-    <motion.div
-      variants={menuContainerParentVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
+    <div
+      // variants={menuContainerParentVariants}
+      // initial={willExit ? "initial" : false}
+      // animate="animate"
+      // exit="exit"
       className="my-2 origin-top overflow-hidden"
     >
       <h3 className={`${headingClassname} mb-2 font-semibold text-xl`}>
@@ -55,7 +55,7 @@ const CategoriesContainerNew = ({
           );
         })}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -6,12 +6,24 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import { AnimatePresence, motion, Variants } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useWillChange,
+  Variants,
+} from "framer-motion";
+
+interface ICategoryData {
+  name: string;
+  array: string[];
+  headingClassname?: string;
+}
 
 const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
+  const willChange = useWillChange();
 
   const categories = useMemo(() => {
     return !data
@@ -43,60 +55,52 @@ const Categories = () => {
   const dropdownMainParentVariants: Variants = {
     initial: {
       gridTemplateRows: "0fr",
+      backfaceVisibility: "hidden",
     },
     animate: {
       gridTemplateRows: "1fr",
       transition: {
         duration: 0.4,
-        ease: [0.12, 1, 0.39, 1],
-        delayChildren: 0.15,
-        bounce: 0,
+        // ease: [0.12, 1, 0.39, 1],
+        ease: "linear",
+        delayChildren: 1,
       },
     },
     leave: {
       gridTemplateRows: "0fr",
       transition: {
-        duration: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-        delay: 0.3,
-        bounce: 0,
+        duration: 0.4,
+        // ease: [0.22, 1, 0.36, 1],
+        ease: "linear",
+        // delay: 0.3,
       },
     },
   };
 
-  const buttonVariants: Variants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.4 } },
-  };
+  // const buttonVariants: Variants = {
+  //   initial: { opacity: 0 },
+  //   animate: { opacity: 1, transition: { duration: 0.4 } },
+  // };
 
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = categories.slice(2, categories.length).map((category) => {
-    const { name, array } = category;
-    return (
-      <CategoriesContainer
-        key={name}
-        categoryName={name}
-        dataArray={array}
-        initialAnimation={false}
-        willExit
-      />
-    );
-  })
+  const expandedCategories = categories.slice(2, categories.length);
 
-  const genderCategories = categoriesByGender.map((category) => {
-    const { name, array, headingClassname } = category;
-    return (
-      <div className="overflow-hidden">
-        <CategoriesContainer
-          key={name}
-          categoryName={name}
-          dataArray={array}
-          headingClassname={headingClassname ? headingClassname : ""}
-          willExit
-        />
-      </div>
-    );
-  })
+  const categoriesJsx = (dataArray: ICategoryData[]) => {
+    return dataArray.map((category) => {
+      const { name, array, headingClassname } = category;
+      return (
+        <div className="overflow-hidden">
+          <CategoriesContainer
+            key={name}
+            categoryName={name}
+            dataArray={array}
+            headingClassname={headingClassname ? headingClassname : ""}
+            willExit
+          />
+        </div>
+      );
+    });
+  };
 
   const SeeAllButton = () => {
     return (
@@ -142,7 +146,6 @@ const Categories = () => {
                 />
               );
             })}
-
             <AnimatePresence>
               {seeAll && (
                 <motion.div
@@ -151,37 +154,40 @@ const Categories = () => {
                   initial="initial"
                   animate="animate"
                   exit="leave"
-                  className={`grid origin-top`}
+                  className={`grid`}
+                  style={{
+                    backfaceVisibility: "hidden",
+                    willChange,
+                  }}
                 >
-                  <motion.div className="overflow-hidden">
-                    {expandedCategories}
-                    <motion.h3
+                  <div className="overflow-hidden">
+                    {categoriesJsx(expandedCategories)}
+                    <h3
                       key={"shopByGenderHeading"}
                       className=" font-bold text-center text-xl drop-shadow-lg overflow-hidden"
-                      variants={buttonVariants}
-                      initial="initial"
-                      animate="animate"
-                      exit="initial"
+                      // variants={buttonVariants}
+                      // initial="initial"
+                      // animate="animate"
+                      // exit="initial"
                     >
                       Shop by Gender
-                    </motion.h3>
-
-                    {genderCategories}
-                  </motion.div>
+                    </h3>
+                    {categoriesJsx(categoriesByGender)}
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            <motion.div
+            <div
               key={"seeAllButton"}
               className={`flex justify-center overflow-hidden `}
-              variants={buttonVariants}
-              animate="animate"
-              initial="initial"
-              exit="initial"
+              // variants={buttonVariants}
+              // initial={false}
+              // animate="animate"
+              // exit="initial"
             >
               <SeeAllButton />
-            </motion.div>
+            </div>
           </div>
         </section>
       </div>
