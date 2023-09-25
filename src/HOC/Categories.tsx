@@ -37,20 +37,20 @@ const Categories = () => {
         ];
   }, [data]);
 
-  const categoriesByGender = !data
-    ? []
-    : [
-        {
-          name: "Women",
-          array: [data[8], data[9], data[13], data[14], data[15]],
-          headingClassname: "text-pink-700 text-center",
-        },
-        {
-          name: "Men",
-          array: [data[10], data[11], data[12]],
-          headingClassname: "text-red-700 text-center",
-        },
-      ];
+  // const categoriesByGender = !data
+  //   ? []
+  //   : [
+  //       {
+  //         name: "Women",
+  //         array: [data[8], data[9], data[13], data[14], data[15]],
+  //         headingClassname: "text-pink-700 text-center",
+  //       },
+  //       {
+  //         name: "Men",
+  //         array: [data[10], data[11], data[12]],
+  //         headingClassname: "text-red-700 text-center",
+  //       },
+  //     ];
 
   const dropdownMainParentVariants: Variants = {
     initial: {
@@ -115,7 +115,7 @@ const Categories = () => {
               />
             );
           })}
-                  </section>
+        </section>
         {/*  */}
         <div className="flex flex-col pb-2">
           <AnimatePresence>
@@ -131,38 +131,33 @@ const Categories = () => {
               >
                 <div className="overflow-hidden px-5">
                   {categoriesJsx(expandedCategories)}
-                  <h3
+                  {/* <h3
                     key={"shopByGenderHeading"}
                     className=" font-bold text-center text-xl drop-shadow-lg"
                   >
                     Shop by Gender
                   </h3>
-                  {categoriesJsx(categoriesByGender)}
+                  {categoriesJsx(categoriesByGender)} */}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-          
         </div>
-
       </div>
       <div className=" flex place-content-center">
-
-          <PrimaryButton
-            onClick={() => {
-              setSeeAll((seeAll) => !seeAll);
-              const parentRefCoords = parentRef.current?.offsetTop;
-              if (seeAll && parentRef && parentRefCoords) {
-                window.scrollTo(0, parentRefCoords - 100);
-              }
-            }}
-            text={seeAll ? "See Less" : "See All Categories"}
-            Icon={
-              seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
+        <PrimaryButton
+          onClick={() => {
+            setSeeAll((seeAll) => !seeAll);
+            const parentRefCoords = parentRef.current?.offsetTop;
+            if (seeAll && parentRef && parentRefCoords) {
+              window.scrollTo(0, parentRefCoords - 100);
             }
-            className=" place-self-center"
-            />
-            </div>
+          }}
+          text={seeAll ? "See Less" : "See All Categories"}
+          Icon={seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
+          className="place-self-center"
+        />
+      </div>
 
       <ProductCarousel category="laptops" />
     </>
