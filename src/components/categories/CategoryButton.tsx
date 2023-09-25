@@ -1,22 +1,14 @@
-// import { Variants, motion } from "framer-motion";
 interface ICategoryButton {
   name: string;
   willExit?: boolean;
 }
 
-// const buttonVariants:Variants = {
-//   initial: { opacity: 0 },
-//   animate: { opacity: 1 },
-//   exit: { opacity: 0 },
-// }
-
 const CategoryButton = ({ name }: ICategoryButton) => {
   return (
     <button
-      // variants={willExit ? buttonVariants : {}}
-      className={`origin-top py-4 pr-4 p-2  border-2 border-b-slate-300 w-auto min-w-[3rem] col-span-6 lg:col-span-3 drop-shadow-lg shadow-inner content-center`}
-      // initial='initial' animate='animate' exit='exit'
+      className={`flex justify-center items-center w-auto min-w-[3rem] border-[.5px] border-zinc-800 col-span-6 lg:col-span-3  drop-shadow-lg shadow-inner`}
     >
+      <div className=" py-3"></div>
       <p className="text-xs font-semibold">{name}</p>
     </button>
   );
