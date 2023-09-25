@@ -160,7 +160,7 @@ const Categories = () => {
             Icon={
               seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
             }
-            className=" place-self-center w-3/4"
+            className=" place-self-center"
             />
             </div>
 
