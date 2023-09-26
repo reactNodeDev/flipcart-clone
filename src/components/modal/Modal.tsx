@@ -1,5 +1,5 @@
 import React, { FC, ReactNode, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { Variants, motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 
 type IModal = {
@@ -35,18 +35,24 @@ const Modal: FC<IModal> = ({ children, onClose }) => {
     };
   }, [showDialog]);
 
+  const modalVariants : Variants = {
+    initial : { opacity: 0, y: -30 },
+    animate : { opacity: 1, y: 0 },
+  }
+
   return (
     <div
       ref={backdropRef}
       onClick={onCloseModal}
-      className="fixed top-0 left-0 w-full h-[100vh] m-0 bg-[rgba(0,0,0,0.5)] z-[10]"
+      className="fixed top-0 left-0 w-full h-full m-0 bg-[rgba(0,0,0,0.5)] z-[10] flex justify-center items-center"
     >
       <motion.dialog
-        initial={{ opacity: 0, y: -30 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -30 }}
+      variants={modalVariants}
+        initial={'initial'}
+        animate={'animate'}
+        exit={'initial'}
         open
-        className="modal top-[20%] w-[30rem] max-w-[90%] z-[11] h-[50vh]"
+        className="modal w-[80%] lg:w-[40%] max-w-[90%] z-[11] h-[50vh] mx-auto"
         transition={{
           duration: 0.2,
           when: "beforeChildren",

@@ -57,7 +57,7 @@ const Categories = () => {
 
   const dropdownMainParentVariants: Variants = {
     initial: {
-      gridTemplateRows: "0fr",
+      gridTemplateRows: 0,
       transition: {
         ease: "linear",
       },
@@ -162,14 +162,14 @@ const Categories = () => {
         </div>
 
         {/* Shop by gender section */}
-        <div className="pb-2 bg-white my-4">
+        <div className="pb-2 bg-white my-4 ">
           <h3
             key={"shopByGenderHeading"}
             className=" font-bold text-center text-xl drop-shadow-lg"
           >
             Shop by Gender
           </h3>
-          <div className="flex justify-around">
+          <div className="flex justify-around gap-3 p-2">
             <CategoryButton name="Men" textClassname="text-md" />
             <CategoryButton name="Women" textClassname="text-md" />
           </div>
