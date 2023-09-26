@@ -15,6 +15,7 @@ import {
   AnimatePresence,
   motion,
   Variants,
+  useWillChange
 } from "framer-motion";
 
 interface ICategoryData {
@@ -27,6 +28,7 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
+  const willChange = useWillChange()
 
   const categories = useMemo(() => {
     return !data
@@ -57,21 +59,18 @@ const Categories = () => {
 
   const dropdownMainParentVariants: Variants = {
     initial: {
-      gridTemplateRows: 0,
-      transition: {
-        ease: "linear",
-      },
+      gridTemplateRows: '0fr',
+      willChange:'auto',
     },
     animate: {
       gridTemplateRows: "1fr",
-      transition: {
-        ease: "linear",
-      },
+      willChange:'contents',
+
     },
   };
 
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = categories.slice(2, categories.length);
+  const expandedCategories = categories.slice(2, categories.length) 
 
   const categoriesJsx = (dataArray: ICategoryData[]) => {
     return dataArray.map((category) => {
@@ -122,7 +121,7 @@ const Categories = () => {
         {/*  */}
 
         {/* Expandable categories section */}
-        <div className="flex flex-col pb-2 bg-white">
+        <motion.div style={{willChange:willChange}} className="max-h-min pb-2 bg-white">
           <AnimatePresence>
             {seeAll && (
               <motion.div
@@ -132,15 +131,15 @@ const Categories = () => {
                 animate={"animate"}
                 exit={"initial"}
                 className={`grid`}
-                style={{ backfaceVisibility: "hidden" }}
+                // style={{ backfaceVisibility: "hidden" }}
               >
                 <div className="overflow-hidden px-5">
-                  {categoriesJsx(expandedCategories)}
+                  {seeAll && categoriesJsx(expandedCategories)}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
         {/*  */}
 
         {/* Show/hide all categories toggle button */}
