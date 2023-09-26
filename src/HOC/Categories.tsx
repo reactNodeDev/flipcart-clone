@@ -60,12 +60,9 @@ const Categories = () => {
   const dropdownMainParentVariants: Variants = {
     initial: {
       gridTemplateRows: '0fr',
-      willChange:'auto',
     },
     animate: {
       gridTemplateRows: "1fr",
-      willChange:'contents',
-
     },
   };
 
@@ -121,7 +118,7 @@ const Categories = () => {
         {/*  */}
 
         {/* Expandable categories section */}
-        <motion.div style={{willChange:willChange}} className="max-h-min pb-2 bg-white">
+        <div className="max-h-min pb-2 bg-white">
           <AnimatePresence>
             {seeAll && (
               <motion.div
@@ -131,7 +128,7 @@ const Categories = () => {
                 animate={"animate"}
                 exit={"initial"}
                 className={`grid`}
-                // style={{ backfaceVisibility: "hidden" }}
+                style={{ willChange }}
               >
                 <div className="overflow-hidden px-5">
                   {seeAll && categoriesJsx(expandedCategories)}
@@ -139,7 +136,7 @@ const Categories = () => {
               </motion.div>
             )}
           </AnimatePresence>
-        </motion.div>
+        </div>
         {/*  */}
 
         {/* Show/hide all categories toggle button */}
