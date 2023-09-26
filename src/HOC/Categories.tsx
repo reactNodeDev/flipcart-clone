@@ -128,7 +128,7 @@ const Categories = () => {
                 animate={"animate"}
                 exit={"initial"}
                 className={`grid`}
-                style={{ willChange }}
+                style={{ willChange : willChange }}
               >
                 <div className="overflow-hidden px-5">
                   {seeAll && categoriesJsx(expandedCategories)}
