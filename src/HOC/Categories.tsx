@@ -1,5 +1,10 @@
 import { useState, useMemo, useRef } from "react";
-import { CategoriesContainer, Loader, PrimaryButton } from "../components";
+import {
+  CategoriesContainer,
+  CategoryButton,
+  Loader,
+  PrimaryButton,
+} from "../components";
 import { useFetch } from "../hooks";
 import {
   MdOutlineKeyboardArrowDown,
@@ -9,7 +14,6 @@ import { ProductCarousel } from ".";
 import {
   AnimatePresence,
   motion,
-  // useWillChange,
   Variants,
 } from "framer-motion";
 
@@ -23,7 +27,6 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  // const willChange = useWillChange();
 
   const categories = useMemo(() => {
     return !data
@@ -94,10 +97,10 @@ const Categories = () => {
 
   return (
     <>
-      <div className="mx-4 my-2 bg-white">
-        <section
+      <section className="mx-4 my-2 ">
+        <div
           ref={parentRef}
-          className={` overflow-hidden rounded-md px-5 py-2`}
+          className={` overflow-hidden rounded-md px-5 py-2 bg-white`}
         >
           {/* category by name */}
           <h3 className="font-bold text-center text-xl drop-shadow-lg">
@@ -115,9 +118,11 @@ const Categories = () => {
               />
             );
           })}
-        </section>
+        </div>
         {/*  */}
-        <div className="flex flex-col pb-2">
+
+        {/* Expandable categories section */}
+        <div className="flex flex-col pb-2 bg-white">
           <AnimatePresence>
             {seeAll && (
               <motion.div
@@ -131,35 +136,48 @@ const Categories = () => {
               >
                 <div className="overflow-hidden px-5">
                   {categoriesJsx(expandedCategories)}
-                  {/* <h3
-                    key={"shopByGenderHeading"}
-                    className=" font-bold text-center text-xl drop-shadow-lg"
-                  >
-                    Shop by Gender
-                  </h3>
-                  {categoriesJsx(categoriesByGender)} */}
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
-      </div>
-      <div className=" flex place-content-center">
-        <PrimaryButton
-          onClick={() => {
-            setSeeAll((seeAll) => !seeAll);
-            const parentRefCoords = parentRef.current?.offsetTop;
-            if (seeAll && parentRef && parentRefCoords) {
-              window.scrollTo(0, parentRefCoords - 100);
-            }
-          }}
-          text={seeAll ? "See Less" : "See All Categories"}
-          Icon={seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown}
-          className="place-self-center"
-        />
-      </div>
+        {/*  */}
 
-      <ProductCarousel category="laptops" />
+        {/* Show/hide all categories toggle button */}
+        <div className=" flex place-content-center">
+          <PrimaryButton
+            onClick={() => {
+              setSeeAll((seeAll) => !seeAll);
+              const parentRefCoords = parentRef.current?.offsetTop;
+              if (seeAll && parentRef && parentRefCoords) {
+                window.scrollTo(0, parentRefCoords - 100);
+              }
+            }}
+            text={seeAll ? "See Less" : "See All Categories"}
+            Icon={
+              seeAll ? MdOutlineKeyboardArrowUp : MdOutlineKeyboardArrowDown
+            }
+            className="place-self-center"
+          />
+        </div>
+
+        {/* Shop by gender section */}
+        <div className="pb-2 bg-white my-4">
+          <h3
+            key={"shopByGenderHeading"}
+            className=" font-bold text-center text-xl drop-shadow-lg"
+          >
+            Shop by Gender
+          </h3>
+          <div className="flex justify-around">
+            <CategoryButton name="Men" />
+            <CategoryButton name="Women" />
+          </div>
+        </div>
+        {/*  */}
+
+        <ProductCarousel category="laptops" />
+      </section>
     </>
   );
 };
