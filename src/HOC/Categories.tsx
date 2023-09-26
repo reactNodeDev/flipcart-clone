@@ -170,8 +170,8 @@ const Categories = () => {
             Shop by Gender
           </h3>
           <div className="flex justify-around">
-            <CategoryButton name="Men" />
-            <CategoryButton name="Women" />
+            <CategoryButton name="Men" textClassname="text-md" />
+            <CategoryButton name="Women" textClassname="text-md" />
           </div>
         </div>
         {/*  */}
