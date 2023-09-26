@@ -30,15 +30,25 @@ const Categories = () => {
   const parentRef = useRef<HTMLDivElement | null>(null);
   const willChange = useWillChange()
 
+  const sliceData = (numbers:number[]) => {
+    let slicedData:string[] = []
+    if(data) {
+      numbers.map((num) => {
+          slicedData.push(data[num])
+      })
+    }
+    return slicedData
+  }
+
   const categories = useMemo(() => {
     return !data
       ? []
       : [
-          { name: "Electronics", array: [data[0], data[1]] },
-          { name: "Self Care", array: [data[2], data[3], data[16]] },
-          { name: "Decor Accessories", array: [data[5], data[6], data[19]] },
-          { name: "Clothes", array: [data[7]] },
-          { name: "Auto", array: [data[17], data[18]] },
+          { name: "Electronics", array: sliceData([0,1]) },
+          { name: "Self Care", array: sliceData([2,3,16]) },
+          { name: "Decor Accessories", array: sliceData([5,6,19]) },
+          { name: "Clothes", array: sliceData([7]) },
+          { name: "Auto", array: sliceData([17,18]) },
         ];
   }, [data]);
 
