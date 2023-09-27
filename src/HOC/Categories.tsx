@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef } from "react";
 import {
+  Accordion,
   CategoriesContainer,
   CategoryButton,
   Loader,
@@ -11,12 +12,6 @@ import {
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
 import { ProductCarousel } from ".";
-import {
-  AnimatePresence,
-  motion,
-  Variants,
-  useWillChange,
-} from "framer-motion";
 
 interface ICategoryData {
   name: string;
@@ -28,7 +23,6 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  const willChange = useWillChange();
 
   const sliceData = (numbers: number[]) => {
     let slicedData: string[] = [];
@@ -79,15 +73,6 @@ const Categories = () => {
   //         headingClassname: "text-red-700 text-center",
   //       },
   //     ];
-
-  const dropdownMainParentVariants: Variants = {
-    initial: {
-      gridTemplateRows: "0fr",
-    },
-    animate: {
-      gridTemplateRows: "1fr",
-    },
-  };
 
   const collapsedCategories = categories.slice(0, 2);
   const expandedCategories = categories.slice(2, categories.length);
@@ -142,23 +127,9 @@ const Categories = () => {
 
         {/* Expandable categories section */}
         <div className="max-h-min pb-2 bg-white">
-          <AnimatePresence>
-            {seeAll && (
-              <motion.div
-                key={"expandedCategoryContainer"}
-                variants={dropdownMainParentVariants}
-                initial={"initial"}
-                animate={"animate"}
-                exit={"initial"}
-                className={`grid`}
-                style={{ willChange: willChange }}
-              >
-                <div className="overflow-hidden px-5">
-                  {seeAll && categoriesJsx(expandedCategories)}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
+          <Accordion dependency={seeAll} > 
+          {seeAll && categoriesJsx(expandedCategories)}
+          </Accordion>
         </div>
         {/*  */}
 
