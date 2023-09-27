@@ -159,15 +159,12 @@ const Categories = () => {
 
           {/* Shop by gender section */}
           <div className="pb-2 bg-white my-4">
-            <div className="flex justify-center items-center gap-x-1">
             <h3
               key={"shopByGenderHeading"}
               className=" font-bold text-center text-xl drop-shadow-lg"
             >
               Shop by Gender
             </h3>
-            <AnimatedSymbol animate={{rotate:showGenderSection ? 180 : 0}} symbol={ <IoIosArrowDown />} />
-            </div>
             <div className="flex justify-around gap-3 p-2">
               <CategoryButton
                 name="Men"
@@ -183,7 +180,9 @@ const Categories = () => {
                     else return "men";
                   });
                 }}
+                Icon={<AnimatedSymbol animate={{rotate:showGenderSection === 'men' ? 180 : 0}} symbol={ <IoIosArrowDown />} />}
               />
+
               <CategoryButton
                 name="Women"
                 textClassname="text-md text-black"
@@ -198,6 +197,7 @@ const Categories = () => {
                     else return "women";
                   });
                 }}
+                Icon={<AnimatedSymbol animate={{rotate:showGenderSection === 'women' ? 180 : 0}} symbol={ <IoIosArrowDown />} />}
               />
             </div>
             <Accordion dependency={showGenderSection}>
