@@ -37,13 +37,13 @@ const useFetch: TypeUseFetch = <ReturnDataType,>(url: string) => {
       if (!res.status) {
         const response = res as unknown as AxiosError;
         if (response?.message.includes("404")) {
-          throw Error("A server error occured. No response receieved");
+          throw new Error("A server error occured. No response receieved");
         }
         if (
           response?.message.includes("Network Error") ||
           response?.code?.includes("ERR_NETWORK")
         ) {
-          throw Error("No internet! Please make sure you are connected to the internet");
+          throw new Error("No internet! Please make sure you are connected to the internet");
         }
       }
     }

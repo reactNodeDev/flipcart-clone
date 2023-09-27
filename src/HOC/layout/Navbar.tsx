@@ -31,7 +31,7 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`min-h-[4rem] w-[100vw] lg:h-[4rem] pb-4 lg:pb-0 bg-white flex flex-col lg:flex-row lg:items-center  lg:space-y-0`}
+        className={`min-h-[4rem] max-w-[100vw] lg:h-[4rem] pb-1 lg:pb-0 bg-white flex flex-col lg:flex-row lg:items-center lg:space-y-0`}
       >
         <div className="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:w-[60%] w-full  lg:space-x-3 h-full lg:items-center lg:justify-between lg:px-4">
           <Link to={"/"} className="lg:mr-3">

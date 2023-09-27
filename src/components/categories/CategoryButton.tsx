@@ -1,15 +1,15 @@
 interface ICategoryButton {
   name: string;
   willExit?: boolean;
-  textClassname? : string
+  textClassname?: string;
+  className? : string;
+  backgroundColor? : string
 }
 
-const CategoryButton: React.FC<ICategoryButton> = ({ name, textClassname }) => {
+const CategoryButton: React.FC<ICategoryButton> = ({ name, textClassname, className }) => {
   return (
-    <button
-    className="min-h-[2rem] flex-grow col-span-6 lg:col-span-3 rounded-md p-1 min-w-[3rem] lg:text-base bg-slate-500 text-white"
-    >
-      <p className={`${textClassname ? textClassname : 'text-xs'}`}>{name}</p>
+    <button className={`${className} min-h-[2rem] col-span-6 lg:col-span-3 rounded-md p-1 flex-grow lg:text-base `}>
+      <p className={`${textClassname ? textClassname : "text-xs font-semibold text-white"}`}>{name}</p>
     </button>
   );
 };

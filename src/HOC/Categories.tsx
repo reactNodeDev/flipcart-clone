@@ -15,7 +15,7 @@ import {
   AnimatePresence,
   motion,
   Variants,
-  useWillChange
+  useWillChange,
 } from "framer-motion";
 
 interface ICategoryData {
@@ -28,27 +28,40 @@ const Categories = () => {
   const [data] = useFetch<string[]>("/categories");
   const [seeAll, setSeeAll] = useState<boolean>(false);
   const parentRef = useRef<HTMLDivElement | null>(null);
-  const willChange = useWillChange()
+  const willChange = useWillChange();
 
-  const sliceData = (numbers:number[]) => {
-    let slicedData:string[] = []
-    if(data) {
+  const sliceData = (numbers: number[]) => {
+    let slicedData: string[] = [];
+    if (data) {
       numbers.map((num) => {
-          slicedData.push(data[num])
-      })
+        slicedData.push(data[num]);
+      });
     }
-    return slicedData
-  }
+    if (!data) throw new Error("Some Error Occured. Try again later !");
+    return slicedData;
+  };
 
   const categories = useMemo(() => {
     return !data
       ? []
       : [
           { name: "Electronics", array: sliceData([0,1]) },
-          { name: "Self Care", array: sliceData([2,3,16]) },
-          { name: "Decor Accessories", array: sliceData([5,6,19]) },
-          { name: "Clothes", array: sliceData([7]) },
-          { name: "Auto", array: sliceData([17,18]) },
+          {
+            name: "Self Care",
+            array: sliceData([2, 3, 16]),
+          },
+          {
+            name: "Decor Accessories",
+            array: sliceData([5, 6, 19]),
+          },
+          {
+            name: "Clothes",
+            array: sliceData([7]),
+          },
+          {
+            name: "Auto",
+            array: sliceData([17, 18]),
+          },
         ];
   }, [data]);
 
@@ -69,7 +82,7 @@ const Categories = () => {
 
   const dropdownMainParentVariants: Variants = {
     initial: {
-      gridTemplateRows: '0fr',
+      gridTemplateRows: "0fr",
     },
     animate: {
       gridTemplateRows: "1fr",
@@ -77,7 +90,7 @@ const Categories = () => {
   };
 
   const collapsedCategories = categories.slice(0, 2);
-  const expandedCategories = categories.slice(2, categories.length) 
+  const expandedCategories = categories.slice(2, categories.length);
 
   const categoriesJsx = (dataArray: ICategoryData[]) => {
     return dataArray.map((category) => {
@@ -96,7 +109,7 @@ const Categories = () => {
 
   if (!data)
     return (
-      <section className="h-[10rem] relative mt-2 mx-4 w-[calc(100vw-2.75rem)] bg-white p-3 overflow-hidden  flex items-center justify-center">
+      <section className="h-[10rem] relative mt-2 mx-4 bg-white p-3 overflow-hidden  flex items-center justify-center">
         <Loader className="h-[3rem] w-[3rem]" />
       </section>
     );
@@ -138,7 +151,7 @@ const Categories = () => {
                 animate={"animate"}
                 exit={"initial"}
                 className={`grid`}
-                style={{ willChange : willChange }}
+                style={{ willChange: willChange }}
               >
                 <div className="overflow-hidden px-5">
                   {seeAll && categoriesJsx(expandedCategories)}
@@ -176,8 +189,8 @@ const Categories = () => {
             Shop by Gender
           </h3>
           <div className="flex justify-around gap-3 p-2">
-            <CategoryButton name="Men" textClassname="text-md" />
-            <CategoryButton name="Women" textClassname="text-md" />
+            <CategoryButton name="Men" textClassname="text-md text-black" className={'border-[1px] shadow-md'} />
+            <CategoryButton name="Women" textClassname="text-md text-black" className={'border-[1px] shadow-md'} />
           </div>
         </div>
         {/*  */}

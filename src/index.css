@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
+body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
-}
-
-.dummyDiv {
-  will-change: transform;
 }
