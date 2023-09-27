@@ -8,10 +8,10 @@ import {
 
 interface IAccordion<DepType> {
   children: React.ReactNode;
-  dependency:DepType
+  dependency: DepType;
 }
 
-const Accordion = <DepType,>({ children, dependency }:IAccordion<DepType>) => {
+const Accordion = <DepType,>({ children, dependency }: IAccordion<DepType>) => {
   const willChange = useWillChange();
 
   const accordionVariants: Variants = {
@@ -25,17 +25,18 @@ const Accordion = <DepType,>({ children, dependency }:IAccordion<DepType>) => {
 
   return (
     <AnimatePresence>
-      {dependency &&  <motion.div
-        key={"expandedCategoryContainer"}
-        variants={accordionVariants}
-        initial={"initial"}
-        animate={"animate"}
-        exit={"initial"}
-        className={`grid`}
-        style={{ willChange: willChange }}
-      >
-        <div className="overflow-hidden px-5">{children}</div>
-      </motion.div>}
+      {dependency && (
+        <motion.div
+          variants={accordionVariants}
+          initial={"initial"}
+          animate={"animate"}
+          exit={"initial"}
+          className={`grid`}
+          style={{ willChange: willChange }}
+        >
+          <div className="overflow-hidden px-5">{children}</div>
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 };

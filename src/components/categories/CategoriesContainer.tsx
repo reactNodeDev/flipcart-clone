@@ -2,8 +2,8 @@ import { memo } from "react";
 import { CategoryButton } from "..";
 
 interface ICategoriesContainer {
-  dataArray: string[];
-  categoryName: string;
+  dataArray: string[]|undefined;
+  categoryName: string | undefined;
   headingClassname?: string;
   initialAnimation?: false;
   willExit?: boolean;
