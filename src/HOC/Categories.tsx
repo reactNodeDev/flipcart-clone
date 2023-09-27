@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef } from "react";
 import {
   Accordion,
+  AnimatedSymbol,
   CategoriesContainer,
   CategoryButton,
   Loader,
@@ -11,6 +12,7 @@ import {
   MdOutlineKeyboardArrowDown,
   MdOutlineKeyboardArrowUp,
 } from "react-icons/md";
+import {IoIosArrowDown} from 'react-icons/io'
 import { ProductCarousel } from ".";
 
 interface ICategoryData {
@@ -156,13 +158,16 @@ const Categories = () => {
           </div>
 
           {/* Shop by gender section */}
-          <div className="pb-2 bg-white my-4 ">
+          <div className="pb-2 bg-white my-4">
+            <div className="flex justify-center items-center gap-x-1">
             <h3
               key={"shopByGenderHeading"}
               className=" font-bold text-center text-xl drop-shadow-lg"
             >
               Shop by Gender
             </h3>
+            <AnimatedSymbol animate={{rotate:showGenderSection ? 180 : 0}} symbol={ <IoIosArrowDown />} />
+            </div>
             <div className="flex justify-around gap-3 p-2">
               <CategoryButton
                 name="Men"

@@ -10,7 +10,7 @@ interface ICategoriesContainer {
   layoutDependency?: any;
 }
 
-const CategoriesContainerNew = ({
+const CategoriesContainer = ({
   dataArray,
   categoryName,
   headingClassname,
@@ -32,4 +32,4 @@ const CategoriesContainerNew = ({
   );
 };
 
-export default memo(CategoriesContainerNew);
+export default memo(CategoriesContainer);

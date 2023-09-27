@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import FlipkartSvg from "../../assets/flipkart.svg";
-import { DropdownMenu, Modal, NavbarItem, SearchBar } from "../../components";
+import { AnimatedSymbol, DropdownMenu, Modal, NavbarItem, SearchBar } from "../../components";
 import { SiGooglemybusiness } from "react-icons/si";
 import { GoPerson } from "react-icons/go";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { CiMenuKebab } from "react-icons/ci";
 import { navbarDropdownItems, navbarDropdownOptionsItems } from "../../utils";
 import { Link, Outlet, useSearchParams } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -65,15 +66,7 @@ const Navbar = () => {
               Icon={GoPerson}
               text="User"
               ExtraIconHTML={
-                <motion.span
-                  animate={{ rotate: toggleDropdown ? 180 : 0 }}
-                  transition={{
-                    duration: 0.1,
-                    type: "tween",
-                  }}
-                >
-                  &#9650;
-                </motion.span>
+                <AnimatedSymbol animate={{rotate:toggleDropdown ? 180 : 0}} symbol={ <IoIosArrowDown />} />
               }
             />
             {toggleDropdown ? (
